@@ -83,47 +83,49 @@
                                             <td>{{ $customer->name }}</td>
                                             <td>{{ $customer->email }}</td>
                                             <td>{{ $customer->pet_owner_type }}</td>
-                                            <td>{{ $customer->verify_status == 1 ? 'Verified': 'Unverified' }}</td> 
+                                            <td>{{ $customer->verify_status == 1 ? 'Verified' : 'Unverified' }}</td>
 
-                                        
+
                                             <td class="text-center">
-                                                
-                                                <form method="post" action="{{route('admin.customer.statuschange')}}">
-                                @csrf
-                                <input type="hidden" name="user_id" value="{{$customer->id}}">
-                            <div class="col-12">
-                               
-                         
-                                <select name="account_manager"  class="form-control mb-2" onchange="this.form.submit()">
-                                  <option value="" selected disabled>Verify Status Change</option>
-                                 
-                                  <option value="1" >Verify</option>
-                                  <option value="0" >Unverified</option>
-                                 
-                                </select>
 
-                          </div>
-                          
-                          
-                            </form>
-                            
-                            <a class="btn btn-info btn-sm"
+                                                <form method="post" action="{{ route('admin.customer.statuschange') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="user_id" value="{{ $customer->id }}">
+                                                    <div class="col-12">
+
+
+                                                        <select name="account_manager" class="form-control mb-2"
+                                                            onchange="this.form.submit()">
+                                                            <option value="" selected disabled>Verify Status Change
+                                                            </option>
+
+                                                            <option value="1">Verify</option>
+                                                            <option value="0">Unverified</option>
+
+                                                        </select>
+
+                                                    </div>
+
+
+                                                </form>
+
+                                                <a class="btn btn-info btn-sm"
                                                     href="{{ route('admin.customers.show', $customer->id) }}"><i
                                                         class="fas fa-eye"></i>
                                                     <span>Show</span>
                                                 </a>
 
 
-                                                <!--<form action="{{ route('admin.customers.destroy', $customer->id) }}"-->
-                                                <!--    method="POST" style="display: inline;">-->
-                                                <!--    @csrf()-->
-                                                <!--    @method('DELETE')-->
-                                                <!--    <button type="submit" onclick="return confirm('Are your sure?')"-->
-                                                <!--        class="btn btn-danger btn-sm">-->
-                                                <!--        <i class="fas fa-trash-alt"></i>-->
-                                                <!--        <span>Delete</span>-->
-                                                <!--    </button>-->
-                                                <!--</form>-->
+                                                <form action="{{ route('admin.customers.destroy', $customer->id) }}"
+                                                    method="POST" style="display: inline;">
+                                                    @csrf()
+                                                    @method('DELETE')
+                                                    <button type="submit" onclick="return confirm('Are your sure?')"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </form>
 
 
 

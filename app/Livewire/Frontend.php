@@ -164,7 +164,7 @@ class Frontend extends Component
         }
 
         $this->cities = UkState::select(['id', 'state'])->get();
-        $this->spots = Pet::where('isPublished', 1)->take(16)->get();
+        $this->spots = Pet::where('isPublished', 1)->where('is_featured', 1)->orderBy('position', 'asc')->take(16)->get();
         //  $this->spots  = Pet::get();
         //  $this->spots  = $spots;
 

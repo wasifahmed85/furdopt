@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\User;
+
+
 use App\Models\UserDetail;
 use App\Models\EmailNotification;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Mail;
 use App\Mail\VerifyMail;
+use App\Models\User;
 
 class CustomerController extends Controller
 {
@@ -24,16 +26,21 @@ class CustomerController extends Controller
     public function show($id)
     {
 
-       
+
         Gate::authorize('customer_access');
         $user = User::findorfail($id);
-        $detail = UserDetail::where('user_id',$id)->first();
-        return view('backend.customers.show', compact('user','detail'));
+        $detail = UserDetail::where('user_id', $id)->first();
+        return view('backend.customers.show', compact('user', 'detail'));
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        // todo deleted lksdfjkasdjk
+
+        Gate::authorize('customer_access');
+        $user = User::findorfail($id);
+        $user->delete();
+        flash('Customer Successfully Deleted.');
+        return to_route('admin.customers.index');
     }
 
     public function verifyStatusChange(Request $request)
@@ -63,4 +70,6 @@ class CustomerController extends Controller
         flash('Status Change Successfully.');
         return to_route('admin.customers.index');
     }
+
+
 }
