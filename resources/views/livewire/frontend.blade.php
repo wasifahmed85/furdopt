@@ -43,6 +43,91 @@
             margin-top: 15px;
         }
 
+        /* Message Modal CSS */
+        .safety-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            color: white;
+            font-size: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: gray;
+        }
+
+        /* Modal Styling */
+        .modal-content {
+            position: relative;
+            background-color: #fffce6;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .modal-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Modal Body */
+        .modal-body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            color: #292929;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 999px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(to right, #1cc2d8, #fadd5b);
+            color: white;
+            border: none;
+        }
+
         @media only screen and (min-width: 280px) and (max-width: 768px) {
 
             .how-it-works {
@@ -214,8 +299,29 @@
     <!-- Begin sign-up section -->
     <!-- call to action -->
     <!-- End sign-up section -->
-
     <div class="gallery-wrap sport-light">
+        <!-- Hidden by default -->
+        <div class="modal-overlay" id="safetyModal">
+            <div class="modal-content">
+                <button type="button" class="close-modal" id="cancelModalBtn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <div class="modal-header">
+                    <div class="safety-icon">
+                        <i class="bi bi-exclamation-triangle-fill text-white fs-3"></i>
+                    </div>
+                    <button type="button" class="close-btn" id="closeModalBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    Never send money upfront, avoid paying deposits, ask lots of questions, and always
+                    request a video call to verify the person is genuine.
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" id="proceedBtn" wire:navigate>Continue</a>
+                </div>
+            </div>
+        </div>
+
         <div class="common-wrap clear">
             <h3>Spotlighted Pets</h3>
 
@@ -232,11 +338,15 @@
 
                             <div class="button-action">
                                 @if ($pet->owner_id == 201)
-                                    <a href="{{ route('f.detail', $pet->slug) }}" class="sent-msg"><i
-                                            class="jws-icon-chatcircledots"></i>Message now!</a>
+                                    <a href="javascript:void(0);" class="sent-msg openSafetyModal"
+                                        data-href="{{ route('f.detail', $pet->slug) }}">
+                                        <i class="jws-icon-chatcircledots"></i>Message now!
+                                    </a>
                                 @else
-                                    <a href="{{ route('f.single.chat', $pet->owner_id) }}" class="sent-msg"><i
-                                            class="jws-icon-chatcircledots"></i>Message now!</a>
+                                    <a href="javascript:void(0);" class="sent-msg openSafetyModal"
+                                        data-href="{{ route('f.single.chat', $pet->owner_id) }}">
+                                        <i class="jws-icon-chatcircledots"></i>Message now!
+                                    </a>
                                 @endif
                                 <!--<a href="#" class="like-heart"><i class="jws-icon-heart"></i> 80%</a>-->
 
@@ -406,12 +516,6 @@
         !--
     </script>-->
 
-
-
-
-
-
-
     <script>
         $(document).ready(function() {
 
@@ -485,6 +589,24 @@
 
 
             })
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            let targetHref = '';
+
+            $('.openSafetyModal').on('click', function() {
+                targetHref = $(this).data('href');
+                $('#safetyModal').css('display', 'flex');
+            });
+            $('#proceedBtn').on('click', function() {
+                if (targetHref) {
+                    window.location.href = targetHref;
+                }
+            });
+            $('#closeModalBtn, #cancelModalBtn').on('click', function() {
+                $('#safetyModal').hide();
+            });
         });
     </script>
 @endpush
