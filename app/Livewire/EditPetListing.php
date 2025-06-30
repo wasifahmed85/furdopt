@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Jobs\ProcessPetImagesJob;
 use App\Models\Category;
 use App\Models\Pet;
 use App\Models\PetImage;
 use App\Models\SubCategory;
 use App\Models\UkState;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -15,129 +16,83 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-
-
 
 class EditPetListing extends Component
 {
-
     use WithFileUploads;
 
+    #[Title('Pet Listing Edit')]
 
-    #[Title(' Pet Listing Edit')]
-    public $showPriceType = 1;
-    public $showPriceRange = 0;
-    public $showPrice = 1;
-
+    public $showPriceType = 1, $showPriceRange = 0, $showPrice = 1;
     public $imageDeleteError;
-    public $states;
-    public $owner_id;
-    public $category_id;
-    public $sub_category_id;
-    public $name;
-    public $gender;
-    public $age;
-    public $size;
-    public $location;
-    public $about;
-    public $pet_id;
-    public $meta_title;
-    public $meta_description;
-    public $meta_keywords;
-    public $price;
-    public $description;
-    public $status;
-    public $price_type;
-    public $price_from;
-    public $price_to;
-    public $ad_type;
-    public $tag;
-    public $feature_list;
-    public $health_guarantee;
-    public $pet_insurance;
-    public $map_link;
-    public $sports;
-    public $size_seeking;
-    public $special_need;
-    public $special_details;
-    public $iscomportable_other_pet;
-    public $iscomportable_children;
-    public $why_rehome;
-    public $best_fit_for_home;
-    public $best_fit_for_home_deatils;
-    public $need_outdoor_space;
 
-    public $iscomportable_details;
-    public $uk_state_id;
-    public $subCategoriesEdit;
+    // Main fields
+    public $pet_id, $petthumbnail;
+    public $category_id, $sub_category_id, $name, $gender, $age, $size, $location, $about;
+    public $meta_title, $meta_description, $meta_keywords;
+    public $price, $description, $status, $price_type, $price_from, $price_to;
+    public $feature_list, $health_guarantee, $pet_insurance, $map_link, $sports;
+    public $size_seeking, $special_need, $special_details;
+    public $iscomportable_other_pet, $iscomportable_children, $why_rehome;
+    public $best_fit_for_home, $best_fit_for_home_deatils, $need_outdoor_space;
+    public $iscomportable_details, $uk_state_id;
+    public $owners = [], $categories = [], $states = [], $subCategories = [], $subCategoriesEdit = [];
     public $petimages;
 
-    // #[Validate('image|required|max:1024')]
-    // public $thumbnail;
-    #[Validate(['images.*' => 'image|max:10240'])]
-   public $images = [];
+    // Image uploads
+    #[Validate(['images.*' => 'nullable|image|max:10240'])]
+    public $images = [];
     public $temporaryImages = [];
     public array $newImages = [];
 
-    
-    
-    
+    // Health & personality
+    public $microchipped_status, $neutered_status, $vaccinations_status, $worm_status, $health_checked;
+    public $special_medical_care, $registered, $website_link, $personality, $weight, $colour, $dob;
+    public $pet_listing_type, $charity_name, $specific_activities;
+    public $iscomportable_other_pet_cat, $iscomportable_others_pets, $iscomportable_other_pet_cat_details;
 
-    public $owners = [];
-    public $categories = [];
-    public $subCategories = [];
-    public $microchipped_status;
-    public $neutered_status;
-    public $vaccinations_status;
-    public $worm_status;
-    public $health_checked;
-    public $special_medical_care;
-    public $registered;
-    public $website_link;
-    public $personality;
-    public $weight;
-    public $colour;
-    public $dob;
-    public $pet_listing_type;
-    public $charity_name;
-    public $specific_activities;
-    public $iscomportable_other_pet_cat;
-    public $iscomportable_others_pets;
-    public $iscomportable_other_pet_cat_details;
     protected $rules = [
-
         'category_id' => 'required',
         'uk_state_id' => 'required',
         'sub_category_id' => 'required',
         'name' => 'required|min:3',
-        'gender' => 'required',
+        'gender' => 'required|in:Male,Female,Unknown',
         'age' => 'required',
-          'price' => 'required|numeric|min:10',
-        // 'size' => 'required',
+        'price' => 'required|numeric|min:10|max:600',
         'description' => 'required',
-        'meta_title' => 'nullable',
-        'meta_description' => 'nullable',
-        'meta_keywords' => 'nullable',
-        'images.*' => 'required|image|max:10240',
+        'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
+        'size' => 'required',
+        'colour' => 'required',
+
+        'weight' => 'nullable|numeric',
+        'personality' => 'required',
+        'iscomportable_other_pet' => 'required',
+        'iscomportable_other_pet_cat' => 'required',
+        'iscomportable_others_pets' => 'required',
+        'iscomportable_children' => 'required',
+        'best_fit_for_home' => 'required',
+        'need_outdoor_space' => 'required',
+        'images' => 'nullable|array|min:1',
 
     ];
 
- public function messages()
-{
-    return [
-        'price.min' => 'Minimum adoption fee is £10.',
-        'price.numeric' => 'The adoption fee must be a number.',
-        'price.required' => 'The adoption fee is required.',
-        'images.required' => 'Maximum Image upload size is 10 mb.',
-    ];
-}
+    public function messages()
+    {
+        return [
+            'price.min' => 'Minimum adoption fee is £10.',
+            'price.numeric' => 'The adoption fee must be a number.',
+            'price.required' => 'The adoption fee is required.',
+            'images.*.max' => 'Maximum image size is 10 MB.',
+            'images.*.image' => 'Only valid image files are allowed.',
+        ];
+    }
+
     public function mount($id)
     {
-        $pet = Pet::findorfail($id);
+        $pet = Pet::findOrFail($id);
         $this->pet_id = $pet->id;
         $this->petthumbnail = $pet->thumbnail;
+
         $this->category_id = $pet->category_id;
         $this->sub_category_id = $pet->sub_category_id;
         $this->name = $pet->name;
@@ -151,8 +106,9 @@ class EditPetListing extends Component
         $this->status = $pet->status;
         $this->price_from = $pet->price_from;
         $this->price_to = $pet->price_to;
-        // $this->ad_type = $pet->ad_type;
         $this->feature_list = $pet->feature_list;
+
+        // Health
         $this->microchipped_status = $pet->microchipped_status;
         $this->neutered_status = $pet->neutered_status;
         $this->vaccinations_status = $pet->vaccinations_status;
@@ -161,14 +117,15 @@ class EditPetListing extends Component
         $this->registered = $pet->registered;
         $this->health_guarantee = $pet->health_guarantee;
         $this->pet_insurance = $pet->pet_insurance;
+
+        // Other
         $this->uk_state_id = $pet->uk_state_id;
-       
         $this->sports = $pet->sports;
-        $this->location = $pet->location;
         $this->map_link = $pet->map_link;
         $this->website_link = $pet->website_link;
+
         $this->categories = Category::where('status', 1)->get(['id', 'name']);
-        $this->states = UkState::orderBy('state','ASC')->get(['id', 'state']);
+        $this->states = UkState::orderBy('state', 'ASC')->get(['id', 'state']);
         $this->subCategoriesEdit = SubCategory::where('status', 1)->get(['id', 'name']);
         $this->petimages = PetImage::where('pet_id', $pet->id)->get();
 
@@ -180,7 +137,6 @@ class EditPetListing extends Component
         $this->best_fit_for_home = $pet->best_fit_for_home;
         $this->best_fit_for_home_deatils = $pet->best_fit_for_home_deatils;
         $this->need_outdoor_space = $pet->need_outdoor_space;
-
         $this->special_medical_care = $pet->special_medical_care;
         $this->weight = $pet->weight;
         $this->colour = $pet->colour;
@@ -188,11 +144,10 @@ class EditPetListing extends Component
         $this->pet_listing_type = $pet->pet_listing_type;
         $this->charity_name = $pet->charity_name;
         $this->specific_activities = $pet->specific_activities;
-         $this->personality = $pet->personality;
-         $this->iscomportable_other_pet_cat = $pet->iscomportable_other_pet_cat;
-         $this->iscomportable_others_pets = $pet->iscomportable_others_pets;
-         $this->iscomportable_other_pet_cat_details = $pet->iscomportable_other_pet_cat_details;
-        // $this->personality = $pet && $pet->personality ? json_decode($pet->personality, true) : [];
+        $this->personality = $pet->personality;
+        $this->iscomportable_other_pet_cat = $pet->iscomportable_other_pet_cat;
+        $this->iscomportable_others_pets = $pet->iscomportable_others_pets;
+        $this->iscomportable_other_pet_cat_details = $pet->iscomportable_other_pet_cat_details;
     }
 
     public function updatedCategoryId($value)
@@ -203,49 +158,39 @@ class EditPetListing extends Component
 
     public function imageDelete($id)
     {
-        $petImage = PetImage::findorfail($id);
-        
-        $petImageCount = PetImage::where('pet_id',$petImage->pet_id)->count();
-        if($petImageCount > 1)
-        {
-           // Storage::disk('public')->delete('images/' . $petImage->image);
-        File::delete(public_path('images/' . $petImage->image));
+        $petImage = PetImage::findOrFail($id);
+        $petImageCount = PetImage::where('pet_id', $petImage->pet_id)->count();
 
-        $petImage->delete();  
-        }else{
-           $this->imageDeleteError = 'At least one image in pet list!';
+        if ($petImageCount > 1) {
+            if (File::exists(public_path('images/' . $petImage->image))) {
+                File::delete(public_path('images/' . $petImage->image));
+            }
+            $petImage->delete();
+            $this->petimages = PetImage::where('pet_id', $this->pet_id)->get();
+        } else {
+            $this->imageDeleteError = 'At least one image is required!';
         }
-        
     }
-    
-    
-      public function updatedNewImages()
+
+    public function updatedNewImages()
     {
-        // Merge new images into the main images array
         foreach ($this->newImages as $file) {
             $this->images[] = $file;
         }
-
-        // Reset newImages so user can select same files again if needed
         $this->reset('newImages');
     }
 
-
-     public function removeImage($index)
+    public function removeImage($index)
     {
         unset($this->images[$index]);
-        $this->images = array_values($this->images); // re-index
+        $this->images = array_values($this->images);
     }
-    
 
     public function UpdateData()
     {
-       
-      $this->validate();
+        $this->validate();
 
-        $pet = Pet::findorfail($this->pet_id);
-
-
+        $pet = Pet::findOrFail($this->pet_id);
         $pet->update([
             // 'owner_id' => Auth::id(),
             'category_id' => $this->category_id,
@@ -302,70 +247,41 @@ class EditPetListing extends Component
             'iscomportable_others_pets' => $this->iscomportable_others_pets,
             'iscomportable_other_pet_cat_details' => $this->iscomportable_other_pet_cat_details,
         ]);
-        $randomNo = Str::random(6);
 
-        $manager = new ImageManager(new Driver());  // Use GD or Imagick
+        // // Save new images
+        // if (!empty($this->images)) {
+        //     $manager = new ImageManager(new Driver());
 
+        //     foreach ($this->images as $img) {
+        //         if ($img && $img->getRealPath()) {
+        //             $imageName = uniqid() . '.webp';
+        //             $image = $manager->read($img->getRealPath())->toWebp(100);
+        //             file_put_contents(public_path('images/' . $imageName), (string)$image);
 
-        // Delete the old thumbnail if exists
-        // if ($this->thumbnail && $pet->thumbnail) {
-        //     Storage::disk('public')->delete('images/' . $pet->thumbnail);
+        //             PetImage::create([
+        //                 'pet_id' => $pet->id,
+        //                 'image' => $imageName
+        //             ]);
+        //         }
+        //     }
         // }
-
-        // if ($pet->thumbnail && File::exists(public_path('images/' . $pet->thumbnail))) {
-        //     File::delete(public_path('images/' . $pet->thumbnail));
-        // }
-
-        // Save new thumbnail
-        // if ($this->thumbnail) {
-        //     $thumbnailName = uniqid() . '.webp';
-        //     $image = $manager->read($this->thumbnail->getRealPath())
-        //         ->cover(600, 600)
-        //         ->toWebp(90);
-
-        //     // Storage::disk('public')->put('images/' . $thumbnailName, (string) $image);
-        //     $imagePath = public_path('images/' . $thumbnailName);
-        //     file_put_contents($imagePath, (string) $image);
-        //     $pet->update([
-
-        //         'thumbnail' => $thumbnailName
-        //     ]);
-        // }
-
 
         if (!empty($this->images)) {
-            // $oldImages = PetImage::where('pet_id', $pet->id)->get();
-            // foreach ($oldImages as $oldImage) {
-
-            //     File::delete(public_path('images/' . $oldImage->image));
-            //     $oldImage->delete();
-            // }
+            $imageData = [];
 
             foreach ($this->images as $img) {
-                $imageName = uniqid() . '.webp';
-
-                $image = $manager->read($img->getRealPath())
-                    // ->cover(800, 800)
-                    ->toWebp(100);
-
-
-                $imagePath = public_path('images/' . $imageName);
-                file_put_contents($imagePath, (string) $image);
-                PetImage::create([
-                    'pet_id' => $pet->id,
-                    'image' => $imageName
-                ]);
+                $tempPath = $img->store('', 'livewire-tmp');
+                $imageData[] = ['temp_path' => $tempPath];
             }
+            // Dispatch job to process images
+            ProcessPetImagesJob::dispatch($pet->id, $imageData);
         }
 
 
-        // Save your data here
-
-        session()->flash('message', 'Data saved successfully!');
-        $this->reset();
+        session()->flash('message', 'Data updated successfully!');
+        $this->reset(['images', 'newImages', 'temporaryImages']);
         return $this->redirect('/pet/listing');
     }
-
 
     public function SelectPrice()
     {

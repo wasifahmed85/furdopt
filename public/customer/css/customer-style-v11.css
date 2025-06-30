@@ -610,7 +610,7 @@ html {
 
 .jws-icon-heartbeat::before{
 	content: '\e812';
-	
+
 }
 .jws-icon-chatcircle:before {
     content: '\e84f';
@@ -714,7 +714,7 @@ html {
     display: flex;
     align-items: center;
     border-radius: 50%;
-    
+
 }
 .profile-info {
     display: flex;
@@ -851,10 +851,10 @@ html {
 	 color: #ffffff;
 	 border-radius: 4px;
   }
-  .user-dropdown-menu li:hover 
+  .user-dropdown-menu li:hover
  .dropdown-menu-link{
 	color: #ffffff;
-  } 
+  }
   .user-menu-wrap img {
 	width: 20px;
 	height: 20px;
@@ -1600,7 +1600,7 @@ html {
     margin-top: 8px;
     margin-bottom: 10px;
 }
-.form-row select, 
+.form-row select,
 .type-selection-row select{
     width:100%;
     height: 52px;
@@ -2185,7 +2185,7 @@ html {
 
 .menu-dropdown {
     visibility: hidden;
-    opacity: 0; 
+    opacity: 0;
 	transition: all 0.3s;
 	position: absolute;
 	top: 100%;
@@ -2361,7 +2361,7 @@ reciver-img {
 
 .form-create-msg {
 	width: 100%;
-	
+
 }
 
 .msg-textarea textarea {
@@ -2750,7 +2750,7 @@ reciver-img {
 }
 .news-letter-text h2 + p{
     color:#000000;
-    
+
 }
 
 .news-letter-form {
@@ -3025,7 +3025,7 @@ reciver-img {
 
  .select2-container--open .select2-dropdown--below{
     border:1px solid #00000050!important;
-    
+
 }
 .select2-results__option{
     padding:6px 10px;
@@ -3117,7 +3117,7 @@ reciver-img {
 }
 .jws-icon-diamond:before {
     content: '\e817';
-	
+
 }
 .activities-card-wrap{
 	display: flex;
@@ -3265,8 +3265,8 @@ reciver-img {
     top: 0;
     width: 100%;
     height: 100%;
-	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 59%, 
-	rgba(0, 0, 0, .132) 80.5%, rgba(0, 0, 0, .4) 100%), 
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 59%,
+	rgba(0, 0, 0, .132) 80.5%, rgba(0, 0, 0, .4) 100%),
 	linear-gradient(180deg, rgba(0, 0, 0, .4) 0%, rgba(0, 0, 0, 0) 25%);
     z-index: 1;
     opacity: .4;
@@ -3302,7 +3302,7 @@ reciver-img {
 	left:0;
 	top:50%;
 	transform: translateY(-50%);
-} 
+}
 .members-active p{
 	font-size: 14px;
 	line-height: 32px;
@@ -3596,7 +3596,7 @@ reciver-img {
 }
 .view-profile:hover{
 	text-decoration: none;
-	
+
 }
 .my-profile-content{
 	display: grid;
@@ -3709,10 +3709,10 @@ reciver-img {
     transition: all .3s ease-in;
 }
 
-.my-profile-text input, 
-.my-profile-text select, 
+.my-profile-text input,
+.my-profile-text select,
 .my-profile-text textarea{
-  
+
     display: block;
     margin-left: 0;
     margin-top: 10px;
@@ -3769,7 +3769,7 @@ reciver-img {
 
 .modal-overlay .modal-content{
     grid-gap: 15px;
-    
+
 }
 
 .profile-edit-content {
@@ -4345,7 +4345,7 @@ input[type="range"]::-webkit-slider-thumb {
 .my-listing-table td {
 	font-size: 13px;
 	line-height: 13px;
-    
+
 }
 .meta-list li svg {
     margin-right: 7px;
@@ -4524,8 +4524,8 @@ input[type="range"]::-webkit-slider-thumb {
 	margin-bottom: 20px;
 	overflow: hidden;
 	overflow-x: auto;
-	
-}  
+
+}
 .purchase-history h5{
 	margin-bottom: 30px;
 }
@@ -4541,14 +4541,14 @@ input[type="range"]::-webkit-slider-thumb {
     color: #fff;
     font-weight: 700;
     padding: 10px;
-} 
+}
  .table-heading th:first-child  {
 	border-top-left-radius: 10px;
  }
  .table-heading th:last-child{
 	border-top-right-radius: 10px;;
  }
- 
+
  .purchase-history .table-body tr{
      display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -4630,7 +4630,7 @@ table.profile-settings thead tr {
 table.profile-settings thead th {
 	width: 80%;
     padding: 16px;
-} 
+}
 
 table.profile-settings thead th:first-child {
     border-top-left-radius: 5px;
@@ -4695,7 +4695,7 @@ table.profile-settings tr td {
 	min-height: 550px;
 	background-color: #375984;
 	position: relative;
-	
+
 }
 .banner:before {
 	content: '';
@@ -5066,7 +5066,7 @@ table.profile-settings tr td {
 
 .gallery-uploads{
     width: 100%;
-    height: 130px;
+    /* height: 130px; */
 	background-color: #fcfcfc;
     border: 1px solid #e5e5e5;
     margin-top:30px;
@@ -5760,7 +5760,7 @@ nav button svg, nav svg{width:30px;}
 	.mobi {
 		display: block!important;
 	}
-	
+
 	.desk {
 		display: none!important;
 	}
@@ -5992,7 +5992,7 @@ nav button svg, nav svg{width:30px;}
 	.radio-label{
 	    padding:6px 15px;
 	}
-	
+
 	.signup-input-inner .error{
 	    font-size: 9px;
 	}
@@ -6180,7 +6180,7 @@ nav button svg, nav svg{width:30px;}
 	.my-profile-grid{
 		display: block;
 	}
-	
+
 	.my-profile-desc{
 		margin-top: 10px;
 	}
@@ -6217,7 +6217,7 @@ nav button svg, nav svg{width:30px;}
 		padding:15px;
 		margin-top: 20px;
 	}
-	    
+
 	.profile-tab-list {
 		overflow-x: auto;
 		white-space: nowrap;
@@ -6249,11 +6249,11 @@ nav button svg, nav svg{width:30px;}
 		margin-top: 0;
 		padding: 0;
 	}
-	
+
 	.no-data-found nav{
 	    padding-left: 0;
 	}
-	
+
 	.my-profile-thumb{
 	    text-align: center;
 	}
@@ -6275,7 +6275,7 @@ nav button svg, nav svg{width:30px;}
 	}
 	.billing-address{
 		margin-top: 20px;
-	}	
+	}
 	.billing-address ul li{
 		align-items: start;
 	}
@@ -6309,13 +6309,13 @@ nav button svg, nav svg{width:30px;}
 	.type-selection-col{
 		display: block;
 	}
-	
+
 	.type-selection-label{
 		text-align: left;
 		padding: 0;
 		margin-bottom: 8px;
 	}
-	
+
 	.has-error-abs .errors-msg {
     position: relative;
         margin-top: -34px;
@@ -6327,7 +6327,7 @@ nav button svg, nav svg{width:30px;}
 	.radio-row {
 	    flex-direction: column;
 	}
-	
+
 	.selection-price{
 		padding-left: 0;
 	}
@@ -6335,7 +6335,7 @@ nav button svg, nav svg{width:30px;}
 		width: 626px;
 		overflow-y: auto;
 	}
-	
+
 	.health-docs .form-group{
 	    display: block;
 	}
@@ -6432,7 +6432,7 @@ nav button svg, nav svg{width:30px;}
 .main-nav.mobi .menu-text {
     font-size: 12px;
 }
-	
+
 }
 
 
@@ -6472,7 +6472,7 @@ nav button svg, nav svg{width:30px;}
 
 
 	/* End chat page */
-	
+
 }
 
 
@@ -6506,7 +6506,7 @@ nav button svg, nav svg{width:30px;}
 	}
 
 	.hamburger {
-	   
+
 		width: 20px;
 		height: 20px;
 		cursor: pointer;
@@ -6745,7 +6745,7 @@ nav button svg, nav svg{width:30px;}
 		right: 6%;
 		bottom: 23%;
 	}
-	
+
 
 	/* End chat page */
 	/* Activities page */
@@ -6821,7 +6821,7 @@ nav button svg, nav svg{width:30px;}
 	}
 
 	/* End chat page */
-	
+
 
 
 }
@@ -6857,7 +6857,7 @@ nav button svg, nav svg{width:30px;}
 
 
 /*	Retina media query.
-	Overrides styles for devices with a 
+	Overrides styles for devices with a
 	device-pixel-ratio of 2+, such as iPhone 4.
 -----------------------------------------------    */
 

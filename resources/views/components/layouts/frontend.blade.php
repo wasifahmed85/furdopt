@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap"
         rel="stylesheet" />
-         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet" />
@@ -20,35 +20,36 @@
     <meta charset="utf-8">
 
     <meta name="format-detection" content="telephone=no">
-   <title>FurDopt | {{ $title ?? 'Furdopt' }}</title>
+    <title>FurDopt | {{ $title ?? 'Furdopt' }}</title>
 
-     @stack('meta')
-  
+    @stack('meta')
+
     <link type="text/css" rel="stylesheet" href="{{ asset('frontendAssets/css/selectric.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset('frontendAssets/css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
-    
-    
-    
+
+
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="{{ asset('frontendAssets/css/style-v21.css') }}" />
-<!--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
-<!--  <link-->
-<!--  rel="stylesheet"-->
-<!--  href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css"-->
-<!--/>-->
-<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slim-select/dist/slimselect.min.css">-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+    <!--  <link-->
+    <!--  rel="stylesheet"-->
+    <!--  href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css"-->
+    <!--/>-->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slim-select/dist/slimselect.min.css">-->
     <style>
         .displayNone {
 
             display: none;
 
         }
-        .landing-header-wrap{
+
+        .landing-header-wrap {
             position: absolute;
-            width:100%;
-            left:0;
-            top:0;
+            width: 100%;
+            left: 0;
+            top: 0;
             z-index: 999;
             background-color: transparent;
         }
@@ -115,7 +116,7 @@
                                     alt="logo" /></a>
                         </div>
                         <!-- main navbar -->
-                       <!-- <div class="main-nav-wrap">
+                        <!-- <div class="main-nav-wrap">
                             <nav class="main-nav">
                                 <span class="close-btn" id="closeBtn"><i class="nav-close-icon"></i></span>
                                 <div class="nav-menu ">
@@ -125,17 +126,17 @@
                                                 <h6>category</h6>
                                                 <ul class="sub-nav">
                                                     @foreach ($categories as $cat)
-                                                        <li><a href="{{ route('f.filter', ['searchCategory' => $cat->id]) }}"
+<li><a href="{{ route('f.filter', ['searchCategory' => $cat->id]) }}"
                                                                 wire:navigate>{{ $cat->name }}</a>
                                                         </li>
-                                                    @endforeach
+@endforeach
                                                 </ul>
                                             </li>
 
                                             @foreach ($headermenus as $header)
-                                                <li><a href="{{ route('f.page', $header->slug) }}"
+<li><a href="{{ route('f.page', $header->slug) }}"
                                                         wire:navigate>{{ $header->name }}</a></li>
-                                            @endforeach
+@endforeach
 
                                             {{-- <li><a href="{{ route('f.faq') }}" wire:navigate>FAQ</a></li>
                                             <li><a href="#">Support</a></li>
@@ -148,15 +149,14 @@
                         </div>-->
                     </div>
                     <div class="header-right landing-header">
-                         @auth
-                            
+                        @auth
                         @else
                             <a href="{{ route('f.login') }}" class="h-cta-link"><i class="messages-icon"></i></a>
                         @endauth
                         <div class="user-menu-wrap">
-                                <button class="user-menu-dropdown-btn"><i class="icon-user"></i></button><span class="desk" style="color:#2E5A88;">My Account</span> <span 
-                                class="mobi"></span>
-                           
+                            <button class="user-menu-dropdown-btn"><i class="icon-user"></i></button><span
+                                class="desk" style="color:#2E5A88;">My Account</span> <span class="mobi"></span>
+
                             <div class="user-dropdown-menu">
                                 <ul>
                                     @auth
@@ -183,12 +183,12 @@
                                 <span class="desk">Rehome Your Pet
 
                                 </span> <span class="mobi">Rehome Your Pet
-</span></a>
+                                </span></a>
                         @else
                             <a href="{{ route('f.register') }}"class="new-advert-btn"><i class="plussmall-icon"></i>
                                 <span class="desk">Rehome Your Pet
-</span> <span class="mobi">Rehome Your Pet
-</span></a>
+                                </span> <span class="mobi">Rehome Your Pet
+                                </span></a>
                         @endauth
                     </div>
                 </div>
@@ -197,7 +197,7 @@
         <!-- //End header section -->
 
         <!-- Begin main content section -->
-        {{ $slot }}
+        {{ $slot ?? '' }}
         <!-- End main content section -->
         <!-- Beginning footer section -->
         <footer class="footer-wrap">
@@ -296,7 +296,9 @@
 
                 </div>
                 <div class="copyright-wrap">
-                    <p>Copyright &copy;2025 <span>{{ $setting->site_name ?? '' }}</span>. All Rights Reserved. Developed by <a href="https://websgoal.com/" target="_blank" style="color:#fff">Websgoal</a></p>
+                    <p>Copyright &copy;2025 <span>{{ $setting->site_name ?? '' }}</span>. All Rights Reserved.
+                        Developed by <a href="https://websgoal.com/" target="_blank" style="color:#fff">Websgoal</a>
+                    </p>
                     <div class="social-wrap">
                         <a href="{{ $setting->facebook }}" target="_blank" class="social-icon"><i
                                 class="facebook-icon"></i></a>
@@ -309,19 +311,19 @@
         </footer>
         <!-- //End main footer section -->
     </main>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <!--<script type="text/javascript" src="{{ asset('frontendAssets/js/jquery-3.5.1.min.js') }}"></script>-->
     <script type="text/javascript" src="{{ asset('frontendAssets/js/jquery.selectric.min.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('frontendAssets/js/swiper-bundle.min.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
     <script type="text/javascript" src="{{ asset('frontendAssets/js/common-script-v2.js') }}" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<!-- Include Choices JavaScript (latest) -->
-<!--<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <!-- Include Choices JavaScript (latest) -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>-->
 
-<!--<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>-->
 
-<!--<script src="https://cdn.jsdelivr.net/npm/slim-select/dist/slimselect.min.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/slim-select/dist/slimselect.min.js"></script>-->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             Fancybox.bind("[data-fancybox]", {
@@ -338,7 +340,7 @@
             }
         };
     </script>
-    <script> 
+    <script>
         (function() {
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
@@ -351,7 +353,7 @@
     </script> --}}
     @livewireScripts
     @stack('scripts')
-    
+
 </body>
 
 </html>

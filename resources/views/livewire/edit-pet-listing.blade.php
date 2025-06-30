@@ -32,7 +32,7 @@
                         <input type="hidden" wire:model="pet_id">
                     </div>
                     <div class="type-selection-wrap">
-                     
+
                         <div class="type-selection-item category">
                             {{-- <div class="type-selection-head">
                                 <i class="rtcl-icon-tags"></i>
@@ -105,16 +105,16 @@
 
                                 </div>
                             </div>
-                             <div class="type-selection-row">
+                            <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Pet Gender <span>*</span></label>
                                 </div>
                                 <div class="form-group has-error">
                                     <select wire:model="gender">
                                         <option>Select Gender</option>
-                                         <option value="Male">♂ Male</option>
-                                    <option value="Female">♀ Female</option>
-                                    <option value="Unknown">❓ Unknown</option>
+                                        <option value="Male">♂ Male</option>
+                                        <option value="Female">♀ Female</option>
+                                        <option value="Unknown">❓ Unknown</option>
                                     </select>
                                     @error('gender')
                                         <small class="errors-msg">{{ $message }}</small>
@@ -143,20 +143,20 @@
 
                                 </div>
                             </div>
-                            
-                                 <div class="type-selection-row">
-                            <div class="type-selection-label">
-                                <label>Date of birth </label>
-                            </div>
-                            <div class="form-group @error('name') has-error @enderror">
-                                <input type="date" wire:model="dob">
-                                @error('dob')
-                                    <small class="errors-msg">{{ $message }}</small>
-                                @enderror
 
+                            <div class="type-selection-row">
+                                <div class="type-selection-label">
+                                    <label>Date of birth </label>
+                                </div>
+                                <div class="form-group @error('name') has-error @enderror">
+                                    <input type="date" wire:model="dob">
+                                    @error('dob')
+                                        <small class="errors-msg">{{ $message }}</small>
+                                    @enderror
+
+                                </div>
                             </div>
-                        </div>
-                                <div class="type-selection-row">
+                            <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Pet Size <span>*</span></label>
                                 </div>
@@ -165,9 +165,9 @@
                                     <select wire:model="size">
                                         <option value="">Select Pet Size</option>
                                         <option value="Small">🐾 Small</option>
-                                    <option value="Medium">🐕 Medium</option>
-                                    <option value="Large">🐕‍🦺 Large</option>
-                                    <option value="Unknown">Unknown</option>
+                                        <option value="Medium">🐕 Medium</option>
+                                        <option value="Large">🐕‍🦺 Large</option>
+                                        <option value="Unknown">Unknown</option>
 
                                     </select>
 
@@ -177,43 +177,46 @@
 
                                 </div>
                             </div>
-                            
-                                <div class="type-selection-item">
-                             
-                             <div class="type-selection-head">
-                                <div class="type-selection-title">
-                                    <i class="rtcl-icon-s-tags"></i>
-                                     <strong>Personality & Needs</strong> 
+
+                            <div class="type-selection-item">
+
+                                <div class="type-selection-head">
+                                    <div class="type-selection-title">
+                                        <i class="rtcl-icon-s-tags"></i>
+                                        <strong>Personality & Needs</strong>
+                                    </div>
+                                </div>
+                                <div class="type-selection-row">
+                                    <div class="type-selection-label">
+
+                                        <label>
+                                            How would you describe your pet’s personality? (Select one)
+                                        </label>
+                                    </div>
+                                    <div class="form-group class="form-group @error('personality') has-error @enderror>
+
+                                        <select wire:model="personality">
+                                            <option value="">Select pet personality</option>
+                                            <option value="Couch Potato">🛋️ Couch Potato: Prefers lounging and
+                                                relaxing; minimal activity needs.</option>
+                                            <option value="Energetic">⚡ Energetic: Always on the go; loves playtime and
+                                                adventures.</option>
+                                            <option value="Adaptable">⚖️ Adaptable: Comfortable with both playtime and
+                                                relaxation; displays a balanced temperament.</option>
+
+
+                                        </select>
+
+                                        @error('personality')
+                                            <small class="errors-msg">{{ $message }}</small>
+                                        @enderror
+
+                                    </div>
+
                                 </div>
                             </div>
+
                             <div class="type-selection-row">
-                                <div class="type-selection-label">
-                               
-                                     <label>
-                                     How would you describe your pet’s personality? (Select one)
-                                      </label>
-                                </div>
-                                   <div class="form-group class="form-group @error('personality') has-error @enderror>
-
-                                <select wire:model="personality">
-                                    <option value="">Select pet personality</option>
-                                    <option value="Couch Potato">🛋️ Couch Potato: Prefers lounging and relaxing; minimal activity needs.</option>
-                                    <option value="Energetic">⚡ Energetic: Always on the go; loves playtime and adventures.</option>
-                                    <option value="Adaptable">⚖️ Adaptable: Comfortable with both playtime and relaxation; displays a balanced temperament.</option>
-                                    
-
-                                </select>
-
-                                @error('personality')
-                                    <small class="errors-msg">{{ $message }}</small>
-                                @enderror
-
-                            </div>
-                         
-                        </div>
-                        </div>
-                        
-                             <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Does your pet have any special needs or medical conditions?
 
@@ -230,7 +233,7 @@
                                     <label>
                                         <input type="radio" name="special_need" wire:model.live="special_need"
                                             value="No">
-                                       ❌ No
+                                        ❌ No
                                     </label>
 
                                     @error('special_need')
@@ -254,153 +257,153 @@
                                     </div>
                                 </div>
                             @endif
-                            
-                              <div class="type-selection-row">
-                            <div class="type-selection-head">
-                                <div class="type-selection-title">
-                                    <i class="rtcl-icon-s-tags"></i>
-                                     <strong>Compatibility</strong> 
+
+                            <div class="type-selection-row">
+                                <div class="type-selection-head">
+                                    <div class="type-selection-title">
+                                        <i class="rtcl-icon-s-tags"></i>
+                                        <strong>Compatibility</strong>
+                                    </div>
                                 </div>
-                            </div>
-                      
-                          <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>Is your pet comfortable around other dogs?
 
-                                <span>*</span>
-                                    </label>
-                                </div>
-                                <div
-                                    class="form-group @error('iscomportable_other_pet') has-error @enderror radio-row">
-                                    <label>
-                                        <input type="radio" name="iscomportable_other_pet"
-                                            wire:model="iscomportable_other_pet" value="Yes">
-                                       ✅ Yes
-                                    </label>
-
-                                    <label>
-                                        <input type="radio" name="iscomportable_other_pet"
-                                            wire:model="iscomportable_other_pet" value="No">
-                                       ❌ No
-                                    </label>
-                                 
-                                    <label>
-                                        <input type="radio" name="iscomportable_other_pet"
-                                            wire:model="iscomportable_other_pet" value="Unsure">
-                                      🤷 Unsure
-
-                                    </label>
-                                  
-
-                                    @error('iscomportable_other_pet')
-                                        <small class="errors-msg">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                          
-                            @if ($iscomportable_other_pet == 'Unsure')
                                 <div class="type-selection-row">
                                     <div class="type-selection-label">
-                                        <label>Details
+                                        <label>Is your pet comfortable around other dogs?
+
+                                            <span>*</span>
                                         </label>
                                     </div>
-                                    <div class="form-group @error('name') has-error @enderror">
-                                        <textarea name="iscomportable_details" wire:model="iscomportable_details"></textarea>
+                                    <div
+                                        class="form-group @error('iscomportable_other_pet') has-error @enderror radio-row">
+                                        <label>
+                                            <input type="radio" name="iscomportable_other_pet"
+                                                wire:model="iscomportable_other_pet" value="Yes">
+                                            ✅ Yes
+                                        </label>
 
-                                        @error('iscomportable_details')
+                                        <label>
+                                            <input type="radio" name="iscomportable_other_pet"
+                                                wire:model="iscomportable_other_pet" value="No">
+                                            ❌ No
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="iscomportable_other_pet"
+                                                wire:model="iscomportable_other_pet" value="Unsure">
+                                            🤷 Unsure
+
+                                        </label>
+
+
+                                        @error('iscomportable_other_pet')
                                             <small class="errors-msg">{{ $message }}</small>
                                         @enderror
-
                                     </div>
                                 </div>
-                            @endif
-                            <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>Is your pet comfortable around other cats?
-                                 <span>*</span>
-                                    </label>
-                                </div>
-                                <div
-                                    class="form-group @error('iscomportable_other_pet_cat') has-error @enderror radio-row">
-                                    <label>
-                                        <input type="radio" name="iscomportable_other_pet_cat"
-                                            wire:model="iscomportable_other_pet_cat" value="Yes">
-                                       ✅ Yes
-                                    </label>
 
-                                    <label>
-                                        <input type="radio" name="iscomportable_other_pet_cat"
-                                            wire:model="iscomportable_other_pet_cat" value="No">
-                                       ❌ No
-                                    </label>
-                                 
-                                    <label>
-                                        <input type="radio" name="iscomportable_other_pet_cat"
-                                            wire:model="iscomportable_other_pet_cat" value="Unsure">
-                                      🤷 Unsure
+                                @if ($iscomportable_other_pet == 'Unsure')
+                                    <div class="type-selection-row">
+                                        <div class="type-selection-label">
+                                            <label>Details
+                                            </label>
+                                        </div>
+                                        <div class="form-group @error('name') has-error @enderror">
+                                            <textarea name="iscomportable_details" wire:model="iscomportable_details"></textarea>
 
-                                    </label>
-                                  
+                                            @error('iscomportable_details')
+                                                <small class="errors-msg">{{ $message }}</small>
+                                            @enderror
 
-                                    @error('iscomportable_other_pet')
-                                        <small class="errors-msg">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>Is your pet comfortable around other pets? (Rabbits, Birds, etc?) 
-
-                                 <span>*</span>
-                                    </label>
-                                </div>
-                                <div
-                                    class="form-group @error('iscomportable_other_pet') has-error @enderror radio-row">
-                                    <label>
-                                        <input type="radio" name="iscomportable_others_pets"
-                                            wire:model="iscomportable_others_pets" value="Yes">
-                                       ✅ Yes
-                                    </label>
-
-                                    <label>
-                                        <input type="radio" name="iscomportable_others_pets"
-                                            wire:model="iscomportable_others_pets" value="No">
-                                       ❌ No
-                                    </label>
-                                 
-                                    <label>
-                                        <input type="radio" name="iscomportable_others_pets"
-                                            wire:model="iscomportable_others_pets" value="Unsure">
-                                      🤷 Unsure
-
-                                    </label>
-                                  
-
-                                    @error('iscomportable_other_pet')
-                                        <small class="errors-msg">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                          
-                            @if ($iscomportable_other_pet_cat == 'Unsure')
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="type-selection-row">
                                     <div class="type-selection-label">
-                                        <label>Details
+                                        <label>Is your pet comfortable around other cats?
+                                            <span>*</span>
                                         </label>
                                     </div>
-                                    <div class="form-group @error('name') has-error @enderror">
-                                        <textarea name="iscomportable_other_pet_cat_details" wire:model="iscomportable_other_pet_cat_details"></textarea>
+                                    <div
+                                        class="form-group @error('iscomportable_other_pet_cat') has-error @enderror radio-row">
+                                        <label>
+                                            <input type="radio" name="iscomportable_other_pet_cat"
+                                                wire:model="iscomportable_other_pet_cat" value="Yes">
+                                            ✅ Yes
+                                        </label>
 
-                                        @error('iscomportable_other_pet_cat_details')
+                                        <label>
+                                            <input type="radio" name="iscomportable_other_pet_cat"
+                                                wire:model="iscomportable_other_pet_cat" value="No">
+                                            ❌ No
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="iscomportable_other_pet_cat"
+                                                wire:model="iscomportable_other_pet_cat" value="Unsure">
+                                            🤷 Unsure
+
+                                        </label>
+
+
+                                        @error('iscomportable_other_pet')
                                             <small class="errors-msg">{{ $message }}</small>
                                         @enderror
-
                                     </div>
                                 </div>
-                            @endif
-  </div>
-   <div class="type-selection-row">
+
+                                <div class="type-selection-row">
+                                    <div class="type-selection-label">
+                                        <label>Is your pet comfortable around other pets? (Rabbits, Birds, etc?)
+
+                                            <span>*</span>
+                                        </label>
+                                    </div>
+                                    <div
+                                        class="form-group @error('iscomportable_other_pet') has-error @enderror radio-row">
+                                        <label>
+                                            <input type="radio" name="iscomportable_others_pets"
+                                                wire:model="iscomportable_others_pets" value="Yes">
+                                            ✅ Yes
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="iscomportable_others_pets"
+                                                wire:model="iscomportable_others_pets" value="No">
+                                            ❌ No
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="iscomportable_others_pets"
+                                                wire:model="iscomportable_others_pets" value="Unsure">
+                                            🤷 Unsure
+
+                                        </label>
+
+
+                                        @error('iscomportable_other_pet')
+                                            <small class="errors-msg">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                @if ($iscomportable_other_pet_cat == 'Unsure')
+                                    <div class="type-selection-row">
+                                        <div class="type-selection-label">
+                                            <label>Details
+                                            </label>
+                                        </div>
+                                        <div class="form-group @error('name') has-error @enderror">
+                                            <textarea name="iscomportable_other_pet_cat_details" wire:model="iscomportable_other_pet_cat_details"></textarea>
+
+                                            @error('iscomportable_other_pet_cat_details')
+                                                <small class="errors-msg">{{ $message }}</small>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Is your pet comfortable around children? <span>*</span></label>
                                 </div>
@@ -427,159 +430,164 @@
 
                                 </div>
                             </div>
-  
-   <div class="type-selection-row">
-                            <div class="type-selection-head">
-                                <div class="type-selection-title">
-                                    <i class="rtcl-icon-s-tags"></i>
-                                     <strong>Home Recommendations</strong> 
-                                </div>
-                            </div> 
+
                             <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>What kind of home would best suit your pet? (Select one)<span>*</span></label>
+                                <div class="type-selection-head">
+                                    <div class="type-selection-title">
+                                        <i class="rtcl-icon-s-tags"></i>
+                                        <strong>Home Recommendations</strong>
+                                    </div>
                                 </div>
-
-
-
-                                <div class="form-group @error('best_fit_for_home') has-error @enderror radio-row">
-                                    <label>
-                                        <input type="radio" name="best_fit_for_home"
-                                            wire:model.live="best_fit_for_home" value="Active household">🏃‍♂️ Active household
-
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="best_fit_for_home"
-                                            wire:model.live="best_fit_for_home" value="Quiet household">
-                                        🛋️ Quiet household
-                                    </label>
-
-                                    <label>
-                                        <input type="radio" name="best_fit_for_home"
-                                            wire:model.live="best_fit_for_home" value="Experienced pet owner">
-                                        🐾 Experienced pet owner
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="best_fit_for_home"
-                                            wire:model.live="best_fit_for_home" value="Other">
-                                      ❓ Other (Please specify):
-
-                                    </label>
-
-                                    @error('best_fit_for_home')
-                                        <small class="errors-msg">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            @if ($best_fit_for_home == 'Other')
                                 <div class="type-selection-row">
                                     <div class="type-selection-label">
-                                        <label>Details
+                                        <label>What kind of home would best suit your pet? (Select
+                                            one)<span>*</span></label>
+                                    </div>
+
+
+
+                                    <div class="form-group @error('best_fit_for_home') has-error @enderror radio-row">
+                                        <label>
+                                            <input type="radio" name="best_fit_for_home"
+                                                wire:model.live="best_fit_for_home" value="Active household">🏃‍♂️
+                                            Active household
+
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="best_fit_for_home"
+                                                wire:model.live="best_fit_for_home" value="Quiet household">
+                                            🛋️ Quiet household
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="best_fit_for_home"
+                                                wire:model.live="best_fit_for_home" value="Experienced pet owner">
+                                            🐾 Experienced pet owner
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="best_fit_for_home"
+                                                wire:model.live="best_fit_for_home" value="Other">
+                                            ❓ Other (Please specify):
+
+                                        </label>
+
+                                        @error('best_fit_for_home')
+                                            <small class="errors-msg">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                @if ($best_fit_for_home == 'Other')
+                                    <div class="type-selection-row">
+                                        <div class="type-selection-label">
+                                            <label>Details
+                                            </label>
+                                        </div>
+                                        <div
+                                            class="form-group @error('best_fit_for_home_deatils') has-error @enderror">
+                                            <textarea name="best_fit_for_home_deatils" wire:model="best_fit_for_home_deatils"></textarea>
+
+                                            @error(' best_fit_for_home_deatils')
+                                                <small class="errors-msg">{{ $message }}</small>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <div class="type-selection-row">
+                                    <div class="type-selection-label">
+                                        <label>Does your pet require a secure outdoor space? <span>*</span>
                                         </label>
                                     </div>
-                                    <div class="form-group @error('best_fit_for_home_deatils') has-error @enderror">
-                                        <textarea name="best_fit_for_home_deatils" wire:model="best_fit_for_home_deatils"></textarea>
 
-                                        @error(' best_fit_for_home_deatils')
+
+
+                                    <div
+                                        class="form-group @error('need_outdoor_space') has-error @enderror radio-row">
+                                        <label>
+                                            <input type="radio" name="need_outdoor_space"
+                                                wire:model.live="need_outdoor_space" value="Yes">✅ Yes
+
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="need_outdoor_space"
+                                                wire:model.live="need_outdoor_space" value="No">
+                                            ❌ No
+                                        </label>
+
+
+                                        @error('need_outdoor_space')
+                                            <small class="errors-msg">{{ $message }}</small>
+                                        @enderror
+
+
+
+                                    </div>
+                                </div>
+
+                                <div class="type-selection-row">
+                                    <div class="type-selection-label">
+                                        <label>How much time does your pet typically require each day for companionship?
+                                            (Helps us match them with a home that can meet their needs.) </label>
+                                    </div>
+                                    <div class="form-group class="form-group @error('size') has-error @enderror>
+
+                                        <select wire:model="dedicated_time">
+
+                                            <option value="">-- Select --</option>
+                                            <option value="Less than 1 hour">🕒 Less than 1 hour</option>
+                                            <option value="1–3 hours">🕒 1–3 hours
+                                            </option>
+                                            <option value="More than 3 hours">🕒 More than 3 hours
+                                            </option>
+
+
+                                        </select>
+
+                                        @error('iscomportable_children')
                                             <small class="errors-msg">{{ $message }}</small>
                                         @enderror
 
                                     </div>
                                 </div>
-                            @endif
+
+
+                            </div>
 
                             <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>Does your pet require a secure outdoor space? <span>*</span>
-                                    </label>
+                                <div class="type-selection-head">
+                                    <div class="type-selection-title">
+                                        <i class="rtcl-icon-s-tags"></i>
+                                        <strong>Rehoming Reason</strong>
+                                    </div>
                                 </div>
+                                <div class="type-selection-row">
+                                    <div class="type-selection-label">
+                                        <label>Why are you looking to rehome this pet?
+                                        </label>
+                                    </div>
+                                    <div class="form-group @error('why_rehome') has-error @enderror">
+                                        <textarea name="why_rehome" wire:model="why_rehome"></textarea>
 
+                                        @error('why_rehome')
+                                            <small class="errors-msg">{{ $message }}</small>
+                                        @enderror
 
-
-                                <div class="form-group @error('need_outdoor_space') has-error @enderror radio-row">
-                                    <label>
-                                        <input type="radio" name="need_outdoor_space"
-                                            wire:model.live="need_outdoor_space" value="Yes">✅ Yes
-
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="need_outdoor_space"
-                                            wire:model.live="need_outdoor_space" value="No">
-                                        ❌ No
-                                    </label>
-
-
-                                    @error('need_outdoor_space')
-                                        <small class="errors-msg">{{ $message }}</small>
-                                    @enderror
-
-
-
-                                </div>
-                            </div>
-                            
-                             <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>How much time does your pet typically require each day for companionship? (Helps us match them with a home that can meet their needs.) </label>
-                                </div>
-                                <div class="form-group class="form-group @error('size') has-error @enderror>
-
-                                    <select wire:model="dedicated_time">
-
-                                        <option value="">-- Select --</option>
-                                        <option value="Less than 1 hour">🕒 Less than 1 hour</option>
-                                        <option value="1–3 hours">🕒 1–3 hours
-                                        </option>
-                                        <option value="More than 3 hours">🕒 More than 3 hours
-                                        </option>
-                                       
-
-                                    </select>
-
-                                    @error('iscomportable_children')
-                                        <small class="errors-msg">{{ $message }}</small>
-                                    @enderror
-
+                                    </div>
                                 </div>
                             </div>
 
-                            
-                        </div>   
-                        
-                        <div class="type-selection-row">
-                            <div class="type-selection-head">
-                                <div class="type-selection-title">
-                                    <i class="rtcl-icon-s-tags"></i>
-                                     <strong>Rehoming Reason</strong> 
-                                </div>
-                            </div> 
-                              <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>Why are you looking to rehome this pet?
-                                    </label>
-                                </div>
-                                <div class="form-group @error('why_rehome') has-error @enderror">
-                                    <textarea name="why_rehome" wire:model="why_rehome"></textarea>
 
-                                    @error('why_rehome')
-                                        <small class="errors-msg">{{ $message }}</small>
-                                    @enderror
-
-                                </div>
-                            </div>
-                        </div> 
-                    
-                            
                             <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Pet Weight <span>*</span></label>
                                 </div>
                                 <div class="form-group @error('name') has-error @enderror">
                                     <input type="number" step="any" wire:model.live="weight" placeholder="kg">
-                                    @if($weight)
-                                    <span>{{$weight}} kg</span>
+                                    @if ($weight)
+                                        <span>{{ $weight }} kg</span>
                                     @endif
                                     @error('weight')
                                         <small class="errors-msg">{{ $message }}</small>
@@ -587,9 +595,9 @@
 
                                 </div>
                             </div>
-                            
-                        
-                           
+
+
+
                             <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Pet Colour <span>*</span></label>
@@ -621,7 +629,7 @@
                             </div>
 
 
-                         
+
                             <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Adoption fee <span>*</span></label>
@@ -656,62 +664,62 @@
 
                                     <div class="form-group">
                                         <div class="check-box-row">
-                                            
+
                                             <input type="checkbox" wire:model="microchipped_status"
                                                 id="microchipped_status" value="1"
                                                 @if ($microchipped_status = '1') checked @endif>
-                                                <label for="microchipped_status"> Microchipped by collection date</label>
+                                            <label for="microchipped_status"> Microchipped by collection date</label>
 
                                         </div>
                                         <div class="check-box-row">
-                                           
+
                                             <input type="checkbox" wire:model="neutered_status" id="neutered_status"
                                                 value="1" @if ($neutered_status = '1') checked @endif>
-                                                 <label for="neutered_status"> Neutered</label>
+                                            <label for="neutered_status"> Neutered</label>
 
                                         </div>
                                         <div class="check-box-row">
-                                           
+
                                             <input type="checkbox" wire:model="vaccinations_status"
                                                 id="vaccinations_status" value="1"
                                                 @if ($vaccinations_status = '1') checked @endif>
-                                                 <label for="vaccinations_status"> Vaccinations up to date</label>
+                                            <label for="vaccinations_status"> Vaccinations up to date</label>
 
                                         </div>
                                         <div class="check-box-row">
-                                           
+
                                             <input type="checkbox" wire:model="worm_status" id="worm_status"
                                                 value="1" @if ($worm_status = '1') checked @endif>
-                                                 <label for="worm_status"> Worm and flea treated</label>
+                                            <label for="worm_status"> Worm and flea treated</label>
 
                                         </div>
                                         <div class="check-box-row">
-                                            
+
                                             <input type="checkbox" wire:model="health_checked" id="health_checked"
                                                 value="1" @if ($health_checked = '1') checked @endif>
-                                                <label for="health_checked"> Health Checked</label>
+                                            <label for="health_checked"> Health Checked</label>
 
                                         </div>
                                         <div class="check-box-row">
-                                           
+
                                             <input type="checkbox" wire:model="special_medical_care"
                                                 id="special_medical_care" value="1"
                                                 @if ($special_medical_care = '1') checked @endif>
-                                                 <label for="special_medical_care">Special medical care required</label>
+                                            <label for="special_medical_care">Special medical care required</label>
 
                                         </div>
                                         <div class="check-box-row">
-                                           
+
                                             <input type="checkbox" wire:model="registered" id="registered"
                                                 value="1" @if ($registered = '1') checked @endif>
-                                                 <label for="registered">Registered</label>
+                                            <label for="registered">Registered</label>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                      
-                    
+
+
                             <div class="type-selection-item">
                                 <div class="type-selection-head">
                                     <div class="type-selection-title">
@@ -723,40 +731,40 @@
                                 <div class="gallery-uploads thumbnail-add update-photo-wrap">
                                     <h4>Drop files here to add them.</h4>
 
-                                     <input type="file" wire:model="newImages" multiple>
+                                    <input type="file" wire:model="newImages" multiple>
 
-                                                                  <div class="uploads-alert mt-4">
-                                                                @foreach ($images as $index => $image)
-                                                                    <div class="relative inline-block mr-2">
-                                                                        <img src="{{ $image->temporaryUrl() }}" alt="Preview" style="height: 50px; width: 50px;">
-                                                                        <button type="button" wire:click="removeImage({{ $index }})">X</button>
-                                                                    </div>
-                                                                @endforeach
-</div>
-                                  
-                                </div>
-                                  <div class="upload-gallery-image">
-
-                                        @foreach ($petimages as $img)
-                                            <img src="{{ asset('images/' . $img->image) }}" height="100"
-                                                width="100" style="height: 50px;width:50px;">
-                                            <p wire:click="imageDelete({{ $img->id }})" style="cursor: pointer">x
-                                            </p>
+                                    <div class="uploads-alert mt-4">
+                                        @foreach ($images as $index => $image)
+                                            <div class="relative inline-block mr-2">
+                                                <img src="{{ $image->temporaryUrl() }}" alt="Preview"
+                                                    style="height: 50px; width: 50px;">
+                                                <button type="button"
+                                                    wire:click="removeImage({{ $index }})">X</button>
+                                            </div>
                                         @endforeach
-                                        @if($imageDeleteError)
-                                      
-                                    <small class="errors-msg">{{ $imageDeleteError }}</small>
-                                
-                                        @endif
                                     </div>
-                          
+
+                                </div>
+                                <div class="upload-gallery-image">
+
+                                    @foreach ($petimages as $img)
+                                        <img src="{{ asset('images/' . $img->image) }}" height="100"
+                                            width="100" style="height: 50px;width:50px;">
+                                        <p wire:click="imageDelete({{ $img->id }})" style="cursor: pointer">x
+                                        </p>
+                                    @endforeach
+                                    @if ($imageDeleteError)
+                                        <small class="errors-msg">{{ $imageDeleteError }}</small>
+                                    @endif
+                                </div>
+
 
                             </div>
-                           
 
 
-                         
-                             <div class="type-selection-row">
+
+
+                            <div class="type-selection-row">
                                 <div class="type-selection-label">
                                     <label>Select Location<span>*</span></label>
                                 </div>
@@ -774,75 +782,85 @@
                                     @enderror
                                 </div>
                             </div>
-                             
 
 
-                       
-                            
-                              
-                             
 
 
-                               
 
 
-                                <div class="type-selection-row terms-conditions-wrap">
+                            @if ($errors->any())
+                                <div class="type-selection-item">
 
-                                    <div class="form-group">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <small class="errors-msg">{{ $error }}</small> <br>
+                                        @endforeach
+                                    </ul>
+
+                                </div>
+                            @endif
 
 
-                                        <div class="checkbox-row terms-conditions">
-                                            <input type="checkbox" id="checked-2" name="vehicle1" value="Bike"
-                                                checked>
-                                            <label for="checked-1">I have read and agree to the website <a
-                                                    href="{{ !empty($terms->slug) ? route('f.page', $terms->slug) : route('f.index') }}">Terms
-                                                    and conditions</a>.</label>
-                                        </div>
-                                        <button type="submit" class="submit-button">Update Pet </button>
+
+
+
+
+
+                            <div class="type-selection-row terms-conditions-wrap">
+
+                                <div class="form-group">
+
+
+                                    <div class="checkbox-row terms-conditions">
+                                        <input type="checkbox" id="checked-2" name="vehicle1" value="Bike"
+                                            checked>
+                                        <label for="checked-1">I have read and agree to the website <a
+                                                href="{{ !empty($terms->slug) ? route('f.page', $terms->slug) : route('f.index') }}">Terms
+                                                and conditions</a>.</label>
                                     </div>
+                                    <button type="submit" class="submit-button">Update Pet </button>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
-        </form>
+    </div>
+    </form>
     </div>
 </section>
 
 @push('scripts')
-<script>
+    <script>
+        $(document).ready(function() {
 
-    $(document).ready(function() {
+            $('#select2').select2({
+                matcher: function(params, data) {
+                    // If there is no search term, return all data
+                    if ($.trim(params.term) === '') {
+                        return data;
+                    }
 
-        $('#select2').select2({
-            matcher: function(params, data) {
-                // If there is no search term, return all data
-                if ($.trim(params.term) === '') {
-                    return data;
+                    // Check if the text starts with the typed term (case insensitive)
+                    if (data.text.toLowerCase().startsWith(params.term.toLowerCase())) {
+                        return data;
+                    }
+
+                    // Otherwise, return null (don't show the result)
+                    return null;
                 }
+            });
 
-                // Check if the text starts with the typed term (case insensitive)
-                if (data.text.toLowerCase().startsWith(params.term.toLowerCase())) {
-                    return data;
-                }
+            $('#select2').on('change', function(e) {
 
-                // Otherwise, return null (don't show the result)
-                return null;
-            }
-        });
+                var data = $('#select2').select2("val");
 
-        $('#select2').on('change', function (e) {
+                // @this.set('selCity', data);
 
-            var data = $('#select2').select2("val");
+            });
 
-            // @this.set('selCity', data);
 
         });
-      
-
-    });
-
-</script>
+    </script>
 @endpush

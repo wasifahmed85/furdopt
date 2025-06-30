@@ -33,8 +33,8 @@ class AppServiceProvider extends ServiceProvider
         $privacy = Page::select(['id', 'name', 'slug'])->where('privacy_status', 1)->where('status', 1)->latest()->take(1)->first();
         $cookie = Page::select(['id', 'name', 'slug'])->where('cookie_status', 1)->where('status', 1)->latest()->take(1)->first();
 
-        
-       
+
+
         \View::share('setting', $setting);
         \View::share('categories', $categories);
         \View::share('headermenus', $headermenus);
