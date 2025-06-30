@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <meta charset="utf-8">
+
+    <meta name="format-detection" content="telephone=no">
+    <title>{{ 'MyPawrent |' . $title ?? 'My Pawrent' }}</title>
+
+
+    <title>{{ $title ?? 'Page Title' }}</title>
+    <link type="text/css" rel="stylesheet" href="{{ asset('frontend/css/selectric.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
+</head>
+
+<body>
+
+    <main class="main-wrap">
+        <!--  Beginning header section -->
+        <header class="header-wrap">
+            <div class="common-wrap clear">
+                <div class="header-inner">
+                    <div class="header-left">
+                        <div class="menu-icon">
+                            <i class="h-menu-icon"></i>
+                        </div>
+                        <div class="logo">
+                            <a href="index.html"><img src="{{ asset('frontend') }}/img/home/logo.png"
+                                    alt="logo" /></a>
+                        </div>
+
+                        <!-- main navbar -->
+                        <div class="main-nav-wrap">
+                            <nav class="main-nav">
+                                <span class="close-btn" id="closeBtn">&times;</span>
+                                <div class="nav-menu ">
+                                    <div class="nav-menu-item">
+                                        <h2>Pets</h2>
+                                        <ul>
+                                            <li class="dropdown">Pets for sale <span class="arrow">></span></li>
+                                            <div class="sub-item">
+                                                <h2>All Pets for sale</h2>
+                                                <ul>
+                                                    <li>Pets for sale</li>
+                                                    <li>Pets for adoption</li>
+                                                    <li>Pets for stud</li>
+                                                    <li>Breeders</li>
+                                                </ul>
+                                            </div>
+                                            <li class="dropdown">Pets for adoption <span class="arrow">></span></li>
+                                            <div class="sub-item">
+                                                <h2>All Pets for sale</h2>
+                                                <ul>
+                                                    <li>Pets for sale</li>
+                                                    <li>Pets for adoption</li>
+                                                    <li>Pets for stud</li>
+                                                    <li>Breeders</li>
+                                                </ul>
+                                            </div>
+                                            <li class="dropdown">Pets for stud <span class="arrow">></span></li>
+                                            <div class="sub-item">
+                                                <h2>All Pets for sale</h2>
+                                                <ul>
+                                                    <li>Pets for sale</li>
+                                                    <li>Pets for adoption</li>
+                                                    <li>Pets for stud</li>
+                                                    <li>Breeders</li>
+                                                </ul>
+                                            </div>
+                                            <li>Breeders</li>
+                                        </ul>
+                                    </div>
+                                    <div class="nav-menu-item">
+                                        <h2>Knowledge Hub</h2>
+                                        <ul>
+                                            <li class="dropdown">Pet articles & advice <span class="arrow">></span>
+                                            </li>
+                                            <li class="dropdown">Breed directory <span class="arrow">></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="nav-menu-item">
+                                        <h2>Support</h2>
+                                        <ul>
+                                            <li>Support & safety portal</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <a href="#" class="h-cta-link"><img src="{{ asset('frontend') }}/svgs/email.svg"
+                                alt="" /></a>
+                        <div class="user-menu-wrap">
+                            <button class="user-menu-dropdown-btn"><img
+                                    src="{{ asset('frontend') }}/svgs/profile-hp.svg" alt="" /></button>
+                            <div class="user-dropdown-menu">
+                                <ul>
+                                    @auth
+                                        <li class="dropdown-menu-item">
+                                            <a href="{{ route('f.dashboard') }}" class="dropdown-menu-link">Dashboard</a>
+                                        </li>
+                                        <li class="dropdown-menu-item">
+                                            <a href="{{ route('f.logout') }}" class="dropdown-menu-link">Log out</a>
+                                        </li>
+                                    @else
+                                        <li class="dropdown-menu-item">
+                                            <a href="{{ route('f.login') }}" class="dropdown-menu-link"> log
+                                                in</a>
+                                        </li>
+                                        <li class="dropdown-menu-item">
+                                            <a href="{{ route('f.register') }}" wire:navigate
+                                                class="dropdown-menu-link">Register</a>
+                                        </li>
+                                    @endauth
+
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="#" wire:navigate class="new-advert-btn desk"><img
+                                src="{{ asset('frontend') }}/svgs//plus.svg" alt="" /> New
+                            Advert</a>
+                        <a href="#" wire:navigate class="new-advert-btn mobi"><img
+                                src="{{ asset('frontend') }}/svgs//plus.svg" alt="" /> New
+                            Ad</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- //End header section -->
+
+        <!-- Begin main content section -->
+        {{ $slot }}
+        <!-- End main content section -->
+        <!-- Beginning footer section -->
+        <footer class="footer-wrap">
+            <div class="common-wrap clear">
+                <div class="footer-logo">
+                    <a href="#"><img src="{{ asset('frontend') }}/img/home/logo.png" alt="logo"></a>
+                </div>
+                <div class="footer-widget">
+                    <div class="footer-widget-item">
+                        <ul>
+                            <li><a href="#">Dogs and Puppies For Sale</a></li>
+                            <li><a href="#">Cocker Spaniel for sale</a></li>
+                            <li><a href="#">Cockapoo for sale</a></li>
+                            <li><a href="#">Labrador Retriever for sale</a></li>
+                            <li><a href="#">German Shepherd for sale</a></li>
+                            <li><a href="#">French Bulldog for sale</a></li>
+                            <li><a href="#">Dachshund for sale</a></li>
+                            <li><a href="#">Cavapoo for sale</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-widget-item">
+                        <ul>
+                            <li><a href="#">Cats and Kittens For Sale</a></li>
+                            <li><a href="#">Maine Coon for sale</a></li>
+                            <li><a href="#">British Shorthair for sal</a></li>
+                            <li><a href="#">Ragdoll for sale</a></li>
+                            <li><a href="#">Bengal for sale</a></li>
+                            <li><a href="#">Sphynx for sale</a></li>
+                            <li><a href="#">Persian for sale</a></li>
+                            <li><a href="#">Savannah for sale</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-widget-item">
+                        <h6>Other Popular Pages</h6>
+                        <ul>
+                            <li><a href="#">Dogs For Sale In London</a></li>
+                            <li><a href="#">Dogs For Sale In Manchester</a></li>
+                            <li><a href="#">Dogs For Sale In Birmingham</a></li>
+                            <li><a href="#">Cats For Sale In London</a></li>
+                            <li><a href="#">Cats For Sale In Manchester</a></li>
+                            <li><a href="#">Cats For Sale In Birmingham</a></li>
+                            <li><a href="#">Dog Adoption In The UK</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-widget-item">
+                        <h6>Information</h6>
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Why advertise with us</a></li>
+                            <li><a href="#">Sell your dogs</a></li>
+                            <li><a href="#">Sell your kittens</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-widget-item">
+                        <div class="social-wrap">
+                            <a href="#" class="social-icon"></a>
+                            <a href="#" class="social-icon"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footerbrands">
+                    <h6>Our brands:</h6>
+                    <div class="footer-brands-nav">
+                        <h5>
+                            Pets4Homes</h5>
+                        <ul>
+                            <li><a href="#">Hastnet</a></li>
+                            <li><a href="#">PuppyPlaats</a></li>
+                            <li><a href="#">iFauna</a></li>
+                            <li><a href="#">MundoAnimalia</a></li>
+                            <li><a href="#">Annunci Animali</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-desc">
+                    <p>Pets4Homes.co.uk use cookies on this site to enhance your user experience. Use of this website
+                        and other services constitutes acceptance of the Pets4Homes <a href="#">Terms of
+                            Conditions</a> and <a href="#">Privacy</a> and <a href="#">Cookie Policy</a> .
+                        You can Manage Preferences at any time.</p>
+                    <p>Pet Media Ltd trading as Pets4Homes is an Appointed Representative of Agria Pet Insurance Ltd,
+                        who administer the insurance. Agria Pet Insurance is authorised and regulated by the Financial
+                        Conduct Authority, Financial Services Register Number 496160. Agria Pet Insurance Ltd is
+                        registered and incorporated in England and Wales with registered number 04258783. Registered
+                        office: First Floor, Blue Leanie, Walton Street, Aylesbury, Buckinghamshire, HP21 7QW. Agria
+                        insurance policies are underwritten by Agria Försäkring who is authorised and regulated by the
+                        Prudential Regulatory Authority and Financial Conduct Authority.</p>
+                </div>
+                <div class="copyright-wrap">
+                    <p>Copyright &copy;2025 <span>Pawrent</span>. All Rights Reserved.</p>
+                </div>
+            </div>
+
+        </footer>
+        <!-- //End main footer section -->
+    </main>
+
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery-3.5.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/jquery.selectric.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/swiper-bundle.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('frontend/js/common-scripts.js') }}" defer></script>
+</body>
+
+</html>

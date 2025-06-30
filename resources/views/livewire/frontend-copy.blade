@@ -1,0 +1,75 @@
+ <!-- Begin main content section -->
+ <div class="main-content">
+     <!-- Begin Hero section -->
+     <section class="hero-wrap" style="background-image: url({{ asset('frontend/img/home/hero-bg.png') }});">
+         <div class="common-wrap  clear">
+             <div class="hero-text">
+                 <div class="hero-desc">
+                     <h3>A safe start to a lifelong friendship</h3>
+                     <p>Connect with trusted breeders and rescues</p>
+                 </div>
+
+                 <div class="search-container">
+                     <form wire:submit.prevent="search">
+                         <div class="search-items">
+                             <!-- Dogs -->
+                             <div class="search-item" wire:click="selectCategoryDog('1')">
+                                 <svg viewBox="0 0 24 24">
+                                     <path
+                                         d="M4.5 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm15 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-7.5 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-4-3c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z" />
+                                 </svg>
+                                 <span>Dogs</span>
+                             </div>
+
+                             <!-- Cats -->
+                             <div class="search-item" wire:click="selectCategoryCat('3')">
+                                 <svg viewBox="0 0 24 24">
+                                     <path
+                                         d="M12 2c-1.1 0-2 .9-2 2 0 .7.4 1.4 1 1.7V7h-3c-1.1 0-2 .9-2 2s.9 2 2 2h3v1H8c-1.1 0-2 .9-2 2s.9 2 2 2h3v2.3c-.6.3-1 1-1 1.7 0 1.1.9 2 2 2s2-.9 2-2c0-.7-.4-1.4-1-1.7V16h3c1.1 0 2-.9 2-2s-.9-2-2-2h-3v-1h3c1.1 0 2-.9 2-2s-.9-2-2-2h-3V5.7c.6-.3 1-1 1-1.7 0-1.1-.9-2-2-2z" />
+                                 </svg>
+                                 <span>Cats</span>
+                             </div>
+
+                             <!-- Other Categories -->
+                             <div class="search-item" id="other-search">
+                                 <svg viewBox="0 0 24 24">
+                                     <circle cx="12" cy="6" r="2" />
+                                     <circle cx="12" cy="12" r="2" />
+                                     <circle cx="12" cy="18" r="2" />
+                                 </svg>
+                                 <span id="search-name">Other</span>
+                                 <ul class="search-dropdown">
+                                     @foreach ($categories as $cat)
+                                         <li wire:click="categoryId = '{{ $cat->id }}'">{{ $cat->name }}</li>
+                                     @endforeach
+                                 </ul>
+                             </div>
+                         </div>
+
+                         <!-- Breed Dropdown -->
+                         <select wire:model="breedId">
+                             <option value="" selected>Select breed</option>
+                             @foreach ($breeds as $breed)
+                                 <option value="{{ $breed->id }}">{{ $breed->name }}</option>
+                             @endforeach
+                         </select>
+
+                         <!-- Location Input -->
+                         <div class="location-container">
+                             <input type="text" class="location-input" placeholder="Select location"
+                                 wire:model="location" />
+                             <svg class="location-icon" viewBox="0 0 24 24">
+                                 <path
+                                     d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V2c0-.55-.45-1-1-1s-1 .45-1 1v1.06C6.83 3.52 3.52 6.83 3.06 11H2c-.55 0-1 .45-1 1s.45 1 1 1h1.06c.46 4.17 3.77 7.48 7.94 7.94V22c0 .55.45 1 1 1s1-.45 1-1v-1.06c4.17-.46 7.48-3.77 7.94-7.94H22c.55 0 1-.45 1-1s-.45-1-1-1h-1.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
+                             </svg>
+                             <button type="submit" class="search-button">Search</button>
+                         </div>
+                     </form>
+
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- End Hero section -->
+ </div>
+ <!-- End main content section -->

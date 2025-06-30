@@ -1,0 +1,366 @@
+@extends('backend.master')
+@push('css')
+    <!-- summernote -->
+    {{-- <link rel="stylesheet" href="{{ asset('backend/plugins/summernote/summernote-bs4.min.css')}}"> --}}
+@endpush
+
+
+
+@section('content')
+
+    <div class="app-content-header">
+        <!--begin::Container-->
+        <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="mb-0">Pet Listign </h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-end">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.pets.index') }}">Pet Listing</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Pet Listing Edit</li>
+                    </ol>
+                </div>
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
+    </div>
+
+
+    <!-- Main content -->
+    <div class="app-content">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Pet Listing</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('admin.pets.update', $pet->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <!-- Owner Selection -->
+                            <div class="col-md-6 mb-3">
+                                {{-- <label for="owner_id" class="form-label">Owner</label>
+                                <select name="owner_id" id="owner_id"
+                                    class="form-select @error('owner_id') is-invalid @enderror" required>
+                                    <option value="">Select Owner</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            {{ $pet->owner_id == $user->id ? 'selected' : '' }}>
+                                            {{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('owner_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div> --}}
+                                <div class="col-md-6 mb-3">
+                                    <label for="ad_type" class="form-label">Ad Type</label>
+                                    <select name="ad_type" id="ad_type"
+                                        class="form-select @error('ad_type') is-invalid @enderror" required>
+                                        <option value="">Select Ad Type</option>
+
+                                        <option value="rehome" {{ $pet->ad_type == 'rehome' ? 'selected' : '' }}>Rehome
+                                        </option>
+                                        <option value="adpot" {{ $pet->ad_type == 'adpot' ? 'selected' : '' }}>Rehome
+                                        </option>
+
+
+                                    </select>
+                                    @error('ad_type')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Category Selection -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="category_id" class="form-label">Category</label>
+                                    <select name="category_id" id="category_id"
+                                        class="form-select @error('category_id') is-invalid @enderror" required>
+                                        <option value="">Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ $pet->category_id == $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Breed/Sub Category Selection -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="sub_category_id" class="form-label">Breed</label>
+                                    <select name="sub_category_id" id="sub_category_id"
+                                        class="form-select @error('sub_category_id') is-invalid @enderror" required>
+                                        <option value="">Select Breed</option>
+                                        @foreach ($subCategories as $breed)
+                                            <option value="{{ $breed->id }}"
+                                                {{ $pet->sub_category_id == $breed->id ? 'selected' : '' }}>
+                                                {{ $breed->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('sub_category_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Pet Name -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Pet Name</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        id="name" name="name" value="{{ old('name', $pet->name) }}" required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Gender -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select name="gender" id="gender"
+                                        class="form-select @error('gender') is-invalid @enderror" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="male" {{ $pet->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                        <option value="female" {{ $pet->gender == 'female' ? 'selected' : '' }}>Female
+                                        <option value="mixed" {{ $pet->gender == 'mixed' ? 'selected' : '' }}>Mixed
+                                        </option>
+                                    </select>
+                                    @error('gender')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Status -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select name="status" id="status"
+                                        class="form-select @error('status') is-invalid @enderror" required>
+                                        <option value="">Select Status</option>
+                                        <option value="available" {{ $pet->status == 'available' ? 'selected' : '' }}>
+                                            Available
+                                        </option>
+                                        <option value="sold" {{ $pet->status == 'sold' ? 'selected' : '' }}>Sold</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Age -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="age" class="form-label">Age (months)</label>
+                                    <input type="number" class="form-control @error('age') is-invalid @enderror"
+                                        id="age" name="age" value="{{ old('age', $pet->age) }}" required>
+                                    @error('age')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Size -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="size" class="form-label">Size</label>
+                                    <select name="size" id="size"
+                                        class="form-select @error('size') is-invalid @enderror" required>
+                                        <option value="">Select Size</option>
+                                        <option value="small" {{ $pet->size == 'small' ? 'selected' : '' }}>Small</option>
+                                        <option value="medium" {{ $pet->size == 'medium' ? 'selected' : '' }}>Medium
+                                        </option>
+                                        <option value="large" {{ $pet->size == 'large' ? 'selected' : '' }}>Large</option>
+                                    </select>
+                                    @error('size')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Price -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                        id="price" name="price" value="{{ old('price', $pet->price) }}" required>
+                                    @error('price')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Location -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input type="text" class="form-control @error('location') is-invalid @enderror"
+                                        id="location" name="location" value="{{ old('location', $pet->location) }}"
+                                        required>
+                                    @error('location')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- About -->
+                                <div class="col-md-12 mb-3">
+                                    <label for="about" class="form-label">About</label>
+                                    <textarea class="form-control @error('about') is-invalid @enderror" id="about" name="about" rows="3"
+                                        required>{{ old('about', $pet->about) }}</textarea>
+                                    @error('about')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Description -->
+                                <div class="col-md-12 mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                        rows="3" required>{{ old('description', $pet->description) }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Meta Title -->
+                                <div class="col-md-12 mb-3">
+                                    <label for="meta_title" class="form-label">Meta Title</label>
+                                    <input type="text" class="form-control @error('meta_title') is-invalid @enderror"
+                                        id="meta_title" name="meta_title"
+                                        value="{{ old('meta_title', $pet->meta_title) }}" required>
+                                    @error('meta_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Meta Description -->
+                                <div class="col-md-12 mb-3">
+                                    <label for="meta_description" class="form-label">Meta Description</label>
+                                    <textarea class="form-control @error('meta_description') is-invalid @enderror" id="meta_description"
+                                        name="meta_description" rows="3" required>{{ old('meta_description', $pet->meta_description) }}</textarea>
+                                    @error('meta_description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <!-- Meta Keywords -->
+                                <div class="col-md-12 mb-3">
+                                    <label for="meta_keywords" class="form-label">Meta Keywords</label>
+                                    <input type="text"
+                                        class="form-control @error('meta_keywords') is-invalid @enderror"
+                                        id="meta_keywords" name="meta_keywords"
+                                        value="{{ old('meta_keywords', $pet->meta_keywords) }}" required>
+                                    @error('meta_keywords')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Update Pet</button>
+                                    <a href="{{ route('admin.pets.index') }}" class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.content-wrapper -->
+
+
+    </div>
+
+
+
+
+@endsection
+@push('js')
+    {{-- <script>
+        document.getElementById('category_id').addEventListener('change', function() {
+            const categoryId = this.value;
+            const breedSelect = document.getElementById('sub_category_id');
+
+            // Clear current options
+            breedSelect.innerHTML = '<option value="">Select Breed</option>';
+
+            if (categoryId) {
+                // Show loading state
+                breedSelect.disabled = true;
+
+                fetch(`/api/categories/${categoryId}/breeds`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        data.forEach(breed => {
+                            const option = new Option(breed.name, breed.id);
+                            breedSelect.add(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // You might want to show an error message to the user
+                        const errorOption = new Option('Error loading breeds', '');
+                        breedSelect.innerHTML = '';
+                        breedSelect.add(errorOption);
+                    })
+                    .finally(() => {
+                        // Re-enable select
+                        breedSelect.disabled = false;
+                    });
+            }
+        });
+    </script> --}}
+    <script>
+        document.getElementById('category_id').addEventListener('change', function() {
+            const categoryId = this.value;
+            const breedSelect = document.getElementById('sub_category_id');
+            const currentBreedId = '{{ $pet->sub_category_id }}';
+
+            // Clear current options
+            breedSelect.innerHTML = '<option value="">Select Breed</option>';
+
+            if (categoryId) {
+                breedSelect.disabled = true;
+
+                fetch(`/api/categories/${categoryId}/breeds`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        data.forEach(breed => {
+                            const option = new Option(breed.name, breed.id);
+                            option.selected = breed.id == currentBreedId;
+                            breedSelect.add(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        const errorOption = new Option('Error loading breeds', '');
+                        breedSelect.innerHTML = '';
+                        breedSelect.add(errorOption);
+                    })
+                    .finally(() => {
+                        breedSelect.disabled = false;
+                    });
+            }
+        });
+    </script>
+@endpush

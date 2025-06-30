@@ -1,0 +1,3 @@
+@extends('components.layouts.frontend')
+
+

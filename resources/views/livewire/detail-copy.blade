@@ -1,0 +1,576 @@
+     <!-- Begin main content section -->
+     <div class="main-content">
+         <div class="pdp">
+             <div class="common-wrap clear">
+                 <!--  Begin breadcrumb  -->
+                 <div class="breadcrumb">
+                     <ul>
+                         <li><a href="#">Home</a></li>
+                         <li><a wire:click="searchCategory({{ $pet->category_id }})"
+                                 style="cursor: pointer">{{ $pet->category->name }}</a></li>
+                         <li><a wire:click="search({{ $pet->sub_category_id }})"
+                                 style="cursor: pointer">{{ $pet->breed->name ?? '' }}</a></li>
+                         <li><a href="#">{{ $pet->name }}</a></li>
+                         {{-- <li><a href="#">Devon</a></li>
+                         <li><a href="#">Cullompton</a></li> --}}
+                     </ul>
+                 </div>
+                 <!-- End breadcrumb  -->
+                 <!-- Begin product details section -->
+                 <div class="pdp-wrap">
+                     <div class="pdp-content">
+                         <!--  Begin Details section -->
+                         <section class="details-section">
+                             <div class="pdp-content-head">
+                                 <div class="pdp-content-head-text">
+                                     <h4>{{ $pet->name }}</h4>
+                                     <div class="location-info">
+                                         <div class="location-info-item">
+                                             <i class="address-location-icon"></i>
+                                             <span>{{ $pet->location }}</span>
+                                         </div>
+                                         <div class="location-info-item">
+                                             <a href="{{ $pet->map_link }}" class="show-map-link">(show map)</a>
+                                         </div>
+                                         <div class="location-info-item">
+                                             <i class="time-icon"></i>
+                                             <span>{{ $pet->created_at->diffForHumans() }}</span>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 @if ($pet->likes()->where('user_id', auth()->user()->id)->exists())
+                                     <button class="favorite-button"><i class="favorite-icon"></i></button>
+                                 @else
+                                     <button class="favorite-button" wire:click="petLikes({{ $pet->id }})"><i
+                                             class="favorite-icon"></i> Save</button>
+                                 @endif
+
+                             </div>
+                             <!-- Begin carousel -->
+                             <div class="pdp-slider-wrap">
+                                 <button type="button" class="fullscreen-btn"><i class="expand-icon"></i></button>
+                                 <div class="swiper pdp-slider">
+                                     <div class="swiper-wrapper">
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-1.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-2.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-3.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-4.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-5.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-6.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-7.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-8.jpg" />
+                                         </div>
+                                         <div class="swiper-slide pdp-slider-item">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-9.jpg" />
+                                         </div>
+                                     </div>
+                                     <div class="pdp-pagination swiper-pagination"></div>
+                                     <div class="swiper-arrow swiper-button-next"></div>
+                                     <div class="swiper-arrow swiper-button-prev"></div>
+                                 </div>
+                                 <div class="swiper pdp-slider-thumbnail">
+                                     <div class="swiper-wrapper">
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-1.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-2.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-3.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-4.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-5.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-6.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-7.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-8.jpg" />
+                                         </div>
+                                         <div class="swiper-slide">
+                                             <img src="{{ asset('frontend') }}/img/pdp/carousel-img-9.jpg" />
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- End carousel -->
+                             <div class="payments-block">
+                                 <h5>Get these benefits when you pay via Pets4Homes</h5>
+                                 <ul class="payments-list">
+                                     <li><i class="health-icon"></i>6 months Health Guarantee</li>
+                                     <li><i class="umbrella-icon"></i>5 weeks free pet insurance from Agria</li>
+                                     <li><i class="moneybag-icon"></i>Payment Protection</li>
+                                     <li><i class="idverified"></i>ID verified breeders</li>
+                                 </ul>
+                                 <div class="btn-group">
+                                     <a href="#" class="more-link">Learn more about Pet Payments</a>
+                                 </div>
+                             </div>
+                             <div class="litter-wrap">
+                                 <h5>Litter</h5>
+                                 <div class="litter-card-grid">
+                                     <a href="#" class="litter-card">
+                                         <div class="litter-card-thumb">
+                                             <div class="litter-card-img">
+                                                 <i class="nopic-icon"></i>
+                                             </div>
+                                         </div>
+                                         <div class="litter-card-text">
+                                             <h6>Scottish Fold Kitten 1</h6>
+                                             <p>Male</p>
+                                             <span>£250</span>
+                                         </div>
+                                     </a>
+                                 </div>
+                             </div>
+                             <div class="details-wrap">
+                                 <h4>Details</h4>
+                                 <div class="details-grid">
+                                     <div class="details-item">
+                                         <div class="details-item-head">
+                                             <i class="info-icon"></i>
+                                             <h6>Info</h6>
+                                         </div>
+                                         <ul class="deails-item-list">
+                                             <li><label>Adv. ID:</label><span>{{ Str::upper($pet->advert_id) }}</span>
+                                             </li>
+                                             <li><label>Views:</label><span>{{ $pet->views }}</span></li>
+                                             <li><label>Favourites:</label><span>{{ $pet->like }}</span></li>
+                                             <li><label>Advert Type:</label><span> For {{ $pet->ad_t }}</span></li>
+                                         </ul>
+                                     </div>
+                                     <div class="details-item">
+                                         <div class="details-item-head">
+                                             <i class="letter-details-icon"></i>
+                                             <h6>Litter details</h6>
+                                         </div>
+                                         <ul class="deails-item-list">
+                                             <li><label>Adv. Location:</label><span>{{ $pet->location }}</span></li>
+                                             <li><label>Breed:</label><a href="#">{{ $pet->breed->name }}</a>
+                                             </li>
+                                             <li><label>Pets in litter:</label><span>{{ $pet->gender }}</span></li>
+                                             <li><label>Age:</label><span>{{ $pet->age }}</span></li>
+                                             <li><label>Ready to Leave:</label><span>2025-02-13</span></li>
+                                             <li><label>Viewable with Mother:</label><i class="close-icon"></i></li>
+                                         </ul>
+                                     </div>
+                                     <div class="details-item health-docs">
+                                         <div class="details-item-head">
+                                             <i class="health-docs-icon"></i>
+                                             <h6>Health & Docs</h6>
+                                         </div>
+                                         <ul class="deails-item-list">
+                                             <li>
+                                                 {!! $pet->microchipped_status == 1 ? '<i class="checkmark-icon"></i>' : '<i class="close-icon"></i>' !!}
+                                                 <span>Microchipped by collection date</span>
+                                             </li>
+                                             <li>
+                                                 {!! $pet->neutered_status == 1 ? '<i class="checkmark-icon"></i>' : '<i class="close-icon"></i>' !!}
+                                                 <span>Neutered</span>
+                                             </li>
+                                             <li>
+                                                 {!! $pet->vaccinations_status == 1 ? '<i class="checkmark-icon"></i>' : '<i class="close-icon"></i>' !!}
+                                                 <span>Vaccinations up to date</span>
+                                             </li>
+                                             <li>
+                                                 {!! $pet->worm_status == 1 ? '<i class="checkmark-icon"></i>' : '<i class="close-icon"></i>' !!}
+                                                 <span>Worm and flea treated</span>
+                                             </li>
+                                             <li>
+                                                 {!! $pet->health_checked == 1 ? '<i class="checkmark-icon"></i>' : '<i class="close-icon"></i>' !!}
+                                                 <span>Health Checked by a vet</span>
+                                             </li>
+                                             <li>
+                                                 {!! $pet->registered == 1 ? '<i class="checkmark-icon"></i>' : '<i class="close-icon"></i>' !!}
+                                                 <span>Registered</span>
+                                             </li>
+
+
+
+                                         </ul>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="description-wrap">
+                                 <h4>Description</h4>
+                                 <p>{{ $pet->description }}</p>
+                             </div>
+                             <div class="buyers-checklist">
+                                 <p><strong>Pets4Homes Safety Advice:</strong> You MUST read our <a
+                                         href="#">buyer's checklist</a> before contacting the advertiser.</p>
+                                 <button class="btn yellow buyers-checklist-btn"
+                                     wire:click="addToCart({{ $pet->id }}, 'featured', {{ $pet->price }})"><i
+                                         class="protection-icon"></i>
+                                     Buyer's checklist</button>
+                             </div>
+                         </section>
+                         <!--  End Details section -->
+                         <!-- Begin Similar adverts section -->
+                         <section class="similar-adverts">
+                             <h4>Similar adverts</h4>
+                             <div class="blog">
+                                 @foreach ($similarPets as $spet)
+                                     <a href="{{ route('f.detail', $spet->slug) }}" wire:navigate class="blog-card">
+                                         <div class="blog-card-thumb">
+                                             <img src="{{ asset('frontend') }}/img/sales/blog-img-7.jpg"
+                                                 alt="">
+                                         </div>
+                                         <div class="blog-card-text">
+                                             <h6>{{ $spet->name }}</h6>
+                                             <span>{{ $spet->breed->name }}</span>
+                                             <p>{{ $spet->gender }}</p>
+                                             <div class="price">
+                                                 <dfn>£</dfn>
+                                                 <p>{{ $spet->price }}</p>
+                                             </div>
+                                         </div>
+                                     </a>
+                                 @endforeach
+                             </div>
+                             @if (!$allLoaded)
+                                 <button class="btn blue-btn load-more-btn"wire:click="loadMore">Load more...</button>
+                             @else
+                                 <div>
+                                     <p style="text-align: center">All similar pets are loaded.</p>
+                                 </div>
+                             @endif
+                         </section>
+                         <!-- End Similar adverts section -->
+                         <!-- Begin dynamic link -->
+                         <div class="dynamic-link-list">
+                             <ul>
+                                 @foreach ($allBreeds as $breed)
+                                     <li><a wire:click="search({{ $breed->id }})"
+                                             style="cursor: pointer">{{ $breed->name }}</a></li>
+                                 @endforeach
+
+
+                             </ul>
+                         </div>
+                         <!-- Begin dynamic link -->
+                         <!-- Begin Related articles section -->
+                         <secion class="articles">
+                             <h4>Related articles</h4>
+                             <div class="articles-card-wrap">
+                                 <a href="#" class="articles-card">
+                                     <div class="articles-card-thumb">
+                                         <img src="{{ asset('frontend') }}/img/pdp/article-img-1.jpg" alt="">
+                                     </div>
+                                     <div class="articles-card-text">
+                                         <ul class="articles-list">
+                                             <li class="select">Cats</li>
+                                             <li>Breed Facts</li>
+                                         </ul>
+                                         <h6>Should you buy a Scottish fold kitten?</h6>
+                                         <p>The Scottish fold is a cat breed with a distinctive physical feature that
+                                             sets them apart from cats of other breeds, being their curved or
+                                             f...<span>Read more</span></p>
+                                     </div>
+                                 </a>
+                                 <a href="#" class="articles-card">
+                                     <div class="articles-card-thumb">
+                                         <img src="{{ asset('frontend') }}/img/pdp/article-img-2.jpg" alt="">
+                                     </div>
+                                     <div class="articles-card-text">
+                                         <ul class="articles-list">
+                                             <li class="select">Cats</li>
+                                             <li>Health & Safety</li>
+                                         </ul>
+                                         <h6>Microchipping for cats</h6>
+                                         <p>Microchipping in dogs is a legal requirement, with puppies needing to be
+                                             chipped and registered before 8 weeks of age. There is currently
+                                             no...<span>Read more</span></p>
+                                     </div>
+                                 </a>
+                                 <a href="#" class="articles-card">
+                                     <div class="articles-card-thumb">
+                                         <img src="{{ asset('frontend') }}/img/pdp/article-img-3.jpg" alt="">
+                                     </div>
+                                     <div class="articles-card-text">
+                                         <ul class="articles-list">
+                                             <li class="select">Cats</li>
+                                             <li>General</li>
+                                             <li>Breed Facts</li>
+                                             <li>Life As A Pet Parent</li>
+                                         </ul>
+                                         <h6>Eight of the best cat breeds for families with kids</h6>
+                                         <p>The Scottish fold is a cat breed with a distinctive physical feature that
+                                             sets them apart from cats of other breeds, being their curved or
+                                             f...<span>Read more</span></p>
+                                     </div>
+                                 </a>
+                             </div>
+                         </secion>
+                         <!-- End Related articles section -->
+                         <!-- Begin Buyer's checklist faq -->
+                         <section class="buyers-checklist">
+                             <div class="checklist-head">
+                                 <i class="icon-protection"></i>
+                                 <h4>buyers-checklist1</h4>
+                             </div>
+                             <div class="checklist-item">
+                                 <h5>How to avoid scams</h5>
+                                 <div class="checklist-row">
+                                     <div class="checklist-icon">
+                                         <img src="./img/pdp/checklist-icon-1.jpg" alt="">
+                                     </div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Keep communication on Pets4Homes</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>Bad actors want to move you to WhatsApp or text message. Use our secure
+                                                 chat service, except
+                                                 for video calls, and report any suspicious activity to us.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="checklist-row">
+                                     <div class="checklist-icon">
+                                         <img src="./img/pdp/checklist-icon-1.jpg" alt="">
+                                     </div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Don’t risk your money</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>For puppies and kittens, use our Pet Payments service so you will be
+                                                 covered by the <a href="#">Pets4Homes Guarantee</a> Pets4Homes
+                                                 Guarantee. It protects you and your pet against
+                                                 bad breeders and fraud. It also creates a paper trail to deter puppy
+                                                 farmers!</p>
+                                             <p>For other pets - never send a deposit unless you have viewed the pet at
+                                                 the seller's premises
+                                                 and are confident that the seller is genuine. You should always pay the
+                                                 final amount when you
+                                                 collect the pet, never before.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="checklist-row">
+                                     <div class="checklist-icon">
+                                         <img src="./img/pdp/checklist-icon-1.jpg" alt="">
+                                     </div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Do not share your ID</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>You risk identity theft if you send a copy of your ID to another user.
+                                                 If someone asks for your
+                                                 ID, please report them.</p>
+                                             <p> Note: Pets4Homes may ask you to upload your ID if you claim on the <a
+                                                     href="#">Pets4Homes
+                                                     Guarantee</a>.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="checklist-row">
+                                     <div class="checklist-icon">
+                                         <img src="./img/pdp/checklist-icon-1.jpg" alt="icon">
+                                     </div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Beware of phishing</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>We will NEVER ask you for your password. And we will never ask for log
+                                                 in emails or bak details
+                                                 via text message or Pets4Homes chat. Check any weblink before clicking
+                                                 on it to make sure it
+                                                 contains pets4homes.co.uk</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="checklist-item checklist-rabbits">
+                                 <h5>Buyer's checklist for rabbits</h5>
+                                 <div class="checklist-row">
+                                     <div class="gradient-bullet">1</div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Be responsible, do your research first</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>Bad actors want to move you to WhatsApp or text message. Use our secure
+                                                 chat service, except
+                                                 for video calls, and report any suspicious activity to us.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="checklist-row">
+                                     <div class="gradient-bullet">2</div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Don’t risk your money</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>For puppies and kittens, use our Pet Payments service so you will be
+                                                 covered by the <a href="#">Pets4Homes Guarantee</a> Pets4Homes
+                                                 Guarantee. It protects you and your pet against
+                                                 bad breeders and fraud. It also creates a paper trail to deter puppy
+                                                 farmers!</p>
+                                             <p>For other pets - never send a deposit unless you have viewed the pet at
+                                                 the seller's premises
+                                                 and are confident that the seller is genuine. You should always pay the
+                                                 final amount when you
+                                                 collect the pet, never before.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="checklist-row">
+                                     <div class="gradient-bullet">3</div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Health check & welfare</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>It can be difficult for the average person to check if a rabbit is
+                                                 healthy or not. The seller
+                                                 should be willing to let you take the rabbit to a vet of your choice
+                                                 for a health check and
+                                                 return the pet within 48 hours for a full refund if there are health
+                                                 issues. If the rabbit has
+                                                 already been health checked, make sure you have this documented and
+                                                 phone their vet. Also
+                                                 remember rabbits need to be neutered so that they can live with other
+                                                 rabbits, and vaccinated
+                                                 annually to protect them against myxomatosis and RVHD1 and 2. Register
+                                                 with a rabbit friendly
+                                                 veterinary Practice. We would advise that you read the following
+                                                 article containing rabbit care
+                                                 and welfare information provided by the <a href="#">Rabbit
+                                                     Welfare Association and Fund
+                                                     (RWAF)</a>.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="checklist-row">
+                                     <div class="gradient-bullet">4</div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Report, don’t support!</h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>If you believe a rabbit may be subject to irresponsible breeding, do not
+                                                 “rescue” the rabbit by
+                                                 rehoming it. Walk away and report the seller to us immediately.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="checklist-row">
+                                     <div class="gradient-bullet">5</div>
+                                     <div class="checklist-collapse-wrap">
+                                         <div class="checklist-collapse-head">
+                                             <h6>Rabbits must be 8 weeks when collected </h6>
+                                             <i class="chevrondown-icon"></i>
+                                         </div>
+                                         <div class="checklist-collapse-body">
+                                             <p>Rabbits must be at least 8 weeks old and fully weaned before they can
+                                                 leave their mothers. Most
+                                                 responsible sellers will keep their rabbits longer than this before
+                                                 they let them go to new
+                                                 homes. Make sure you take some of the food with you so you can change
+                                                 over to your own food
+                                                 gradually.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </section>
+                         <!-- End Buyer's checklist faq -->
+
+                     </div>
+                     <!--  Beign aside  -->
+                     <aside class="pdp-sidebar">
+                         <div class="price-box">
+                             <span>£975</span>
+                         </div>
+                         <a href="#" class="btn blue-btn cta-msg-btn"><i class="msg-icon"></i>Message</a>
+                         <div class="user-details-wrap">
+                             <div class="user-details-info">
+                                 <div class="user-details-desc">
+                                     <a href="#" class="user-link">{{ $pet->user->name }}<i
+                                             class="idverified-icon"></i>
+                                     </a>
+                                     <ul class="user-details-info-list">
+                                         <li><i class="locations-icon"></i>{{ Auth::user()->location }}</li>
+                                         <li><i class="time-icon"></i>1 day</li>
+                                         <li>Member since: {{ $pet->user->created_at->diffForHumans() }}</li>
+                                     </ul>
+                                 </div>
+                                 <a href="#" class="user-details-link"><img
+                                         src="{{ asset('storage/images/' . $pet->user->avatar) }}"
+                                         alt=""></a>
+                             </div>
+                             <div class="verified-wrap">
+                                 <h5>Verified by:</h5>
+                                 <div class="verified-list">
+                                     <ul>
+                                         <li><i class="verified-accept-icon"></i>Phone</li>
+                                         <li><i class="verified-accept-icon"></i>Email</li>
+                                         <li><i class="verified-accept-icon"></i>Google</li>
+                                         <li><i class="unverified-icon"></i>Facebook</li>
+                                     </ul>
+                                 </div>
+                             </div>
+                             <div class="detaills-view-wrap">
+                                 <a href="#" class="btn yellow">View all adverts (1) from this user</a>
+                                 <div class="user-cta">
+                                     <button class="user-cta-btn"><i class="share-iocn"></i>Share advert</button>
+                                     <button class="user-cta-btn report-btn"><i class="report-icon"></i>Report
+                                         advert</button>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="welfare-card">
+                             <div class="welfare-card-head">
+                                 <h5>We take animal welfare seriously</h5>
+                                 <img src="{{ asset('frontend') }}/svgs/welfare-logo.svg" alt="">
+                             </div>
+                             <div class="welfare-card-body">
+                                 <p>PAAG promotes responsible pet advertising to help protect animal welfare. That's why
+                                     Pets4Homes works to ensure all of our adverts meet PAAG's minimum standards.</p>
+                             </div>
+                             <div class="welfare-card-footer">
+                                 <a href="#" class="more-link">Find out more</a>
+                             </div>
+                         </div>
+                     </aside>
+                 </div>
+             </div>
+         </div>
+
+         <!-- End product details section -->
+     </div>
+     <!-- End main content section -->

@@ -1,0 +1,103 @@
+.chat-content hr{
+    border:none;
+}
+.chat-content ul {
+    display: flex;
+    flex-direction: column;
+    border:1px solid #00000050;
+}
+
+.chat-content ul li{
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+    border-bottom: 1px solid #00000050;
+    cursor: pointer;
+}
+.chat-content ul a:last-child li{
+    border-bottom: none;
+}
+.chat-img{
+    border-radius: 100%;
+    object-fit: cover;
+}
+.about{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+}
+.about .name{
+    text-transform: capitalize;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.card-body .form-group{
+    margin-top: 8px;
+}
+.card-body .form-group label{
+    margin-bottom: 10px;
+    font-weight: 700;
+    margin-right: 10px;
+}
+/*.form-control{
+    margin-bottom:15px;
+}*/
+#preview-image-before-upload{
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.form-group-label{
+    display: block;
+}
+.form-check{
+    display: inline-block;
+    margin-right: 20px;
+}
+.form-check-input{
+    cursor: pointer;
+}
+.pagination{
+    flex-direction: row!important;
+}
+.page-link{
+    cursor: pointer;
+}
+.chat-content .card-footer nav{
+    display: none;
+}
+.form-wrap{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+   grid-gap: 15px 28px;
+}
+.form-label, .type-selection-label{
+    font-weight: 700;
+}
+.radio-row label{
+    font-weight: 400!important;
+}
+.radio-row input[type="radio"]{
+    margin-right:5px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+}
+
+
+
+@media only screen and (min-width: 280px) and (max-width: 1400px) {
+
+.form-wrap{
+    display: block;
+}
+	
+
+}
+
