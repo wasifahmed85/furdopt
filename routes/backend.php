@@ -51,6 +51,16 @@ Route::resource('faqs', FaqController::class);
 Route::resource('reports', ReportController::class);
 Route::resource('cities', CityController::class);
 
+// routes/web.php (inside the admin group)
+
+// routes/web.php
+Route::post('/admin/pets/featured-change', [PetController::class, 'featuredChange'])
+    ->name('pet.featuredchange');
+
+
+Route::post('pets/reorder', [PetController::class, 'reorder'])->name('pets.reorder');
+
+
 Route::get('ro', [RoleController::class, 'per']);
 Route::resource('roles', RoleController::class);
 

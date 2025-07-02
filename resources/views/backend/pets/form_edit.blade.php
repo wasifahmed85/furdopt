@@ -31,6 +31,35 @@
 
     <!-- Main content -->
     <div class="app-content">
+        {{-- @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif --}}
+        {{-- ========================= Start Errors  ========================= --}}
+        {{-- Put this at the very top of form_edit.blade.php (or your layout file) --}}
+        @php
+            // Check if $errors is currently a string (due to controller's `with('errors', '...')`)
+if (is_string($errors)) {
+    // Temporarily store the string message
+    $customErrorMessage = $errors;
+
+    // Create a new empty ViewErrorBag
+    $errors = new \Illuminate\Support\ViewErrorBag();
+
+    // Add the custom error message to the default bag
+    // You can assign it to a 'general' key or any key you prefer
+    $errors->add('general', $customErrorMessage);
+            }
+        @endphp
+
+        {{-- NOW, your existing error display logic will work correctly --}}
+
+        {{-- This block will now work for both validation errors AND your custom string error --}}
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -40,6 +69,8 @@
                 </ul>
             </div>
         @endif
+
+        {{-- ========================= End Errors  ========================= --}}
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
@@ -119,7 +150,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-    <!-- Gender -->
+                            <!-- Gender -->
                             <div class="col-md-6 mb-3">
                                 <label for="gender" class="form-label">Gender</label>
                                 <select name="gender" id="gender"
@@ -154,23 +185,23 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            
-                              <div class="col-md-6 mb-3">
+
+                            <div class="col-md-6 mb-3">
                                 <label for="name" class="form-label">DOB </label>
-                                <input type="date" class="form-control @error('dob') is-invalid @enderror"
-                                    id="name" name="dob" value="{{$pet->dob}}">
+                                <input type="date" class="form-control @error('dob') is-invalid @enderror" id="name"
+                                    name="dob" value="{{ $pet->dob }}">
                                 @error('dob')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                          
-                        
+
+
 
 
                             <!-- Size -->
                             <div class="col-md-6 mb-3">
-                                 <label for="size" class="form-label">Size<span>*</span></label>
+                                <label for="size" class="form-label">Size<span>*</span></label>
                                 <!--<input type="text" class="form-control @error('size') is-invalid @enderror"-->
                                 <!--    id="age" name="size">-->
                                 <select name="size" id="size"
@@ -188,25 +219,31 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
- <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="colour" class="form-label">Pet Colour</label>
                                 <select name="colour" id="colour"
                                     class="form-select @error('colour') is-invalid @enderror" required>
                                     <option>Select Pet Colour</option>
-                                 <option {{ $pet->colour == 'Black' ? 'selected' : '' }} value="Black">Black</option>
-                                <option {{ $pet->colour == 'White' ? 'selected' : '' }} value="White">White</option>
-                                <option {{ $pet->colour == 'Brown' ? 'selected' : '' }} value="Brown">Brown</option>
-                                <option {{ $pet->colour == 'Grey' ? 'selected' : '' }} value="Grey">Grey</option>
-                                <option {{ $pet->colour == 'Golden' ? 'selected' : '' }} value="Golden">Golden</option>
-                                <option {{ $pet->colour == 'Red' ? 'selected' : '' }} value="Red">Red</option>
-                                <option {{ $pet->colour == 'Cream' ? 'selected' : '' }} value="Cream">Cream</option>
-                                <option {{ $pet->colour == 'Tan' ? 'selected' : '' }} value="Tan">Tan</option>
-                                <option {{ $pet->colour == 'Blue' ? 'selected' : '' }} value="Blue ">Blue (Grayish-Blue)</option>
-                                <option {{ $pet->colour == 'Orange' ? 'selected' : '' }} value="Orange">Orange</option>
-                                <option {{ $pet->colour == 'Yellow' ? 'selected' : '' }} value="Yellow">Yellow</option>
-                                <option {{ $pet->colour == 'Green' ? 'selected' : '' }} value="Green ">Green </option>
-                                <option {{ $pet->colour == 'Multicolor' ? 'selected' : '' }} value="Multicolor">Multicolor / Mixed</option>
-                                <option {{ $pet->colour == 'Unknown' ? 'selected' : '' }} value="Unknown ">Unknown </option>
+                                    <option {{ $pet->colour == 'Black' ? 'selected' : '' }} value="Black">Black</option>
+                                    <option {{ $pet->colour == 'White' ? 'selected' : '' }} value="White">White</option>
+                                    <option {{ $pet->colour == 'Brown' ? 'selected' : '' }} value="Brown">Brown</option>
+                                    <option {{ $pet->colour == 'Grey' ? 'selected' : '' }} value="Grey">Grey</option>
+                                    <option {{ $pet->colour == 'Golden' ? 'selected' : '' }} value="Golden">Golden
+                                    </option>
+                                    <option {{ $pet->colour == 'Red' ? 'selected' : '' }} value="Red">Red</option>
+                                    <option {{ $pet->colour == 'Cream' ? 'selected' : '' }} value="Cream">Cream</option>
+                                    <option {{ $pet->colour == 'Tan' ? 'selected' : '' }} value="Tan">Tan</option>
+                                    <option {{ $pet->colour == 'Blue' ? 'selected' : '' }} value="Blue ">Blue
+                                        (Grayish-Blue)</option>
+                                    <option {{ $pet->colour == 'Orange' ? 'selected' : '' }} value="Orange">Orange
+                                    </option>
+                                    <option {{ $pet->colour == 'Yellow' ? 'selected' : '' }} value="Yellow">Yellow
+                                    </option>
+                                    <option {{ $pet->colour == 'Green' ? 'selected' : '' }} value="Green ">Green </option>
+                                    <option {{ $pet->colour == 'Multicolor' ? 'selected' : '' }} value="Multicolor">
+                                        Multicolor / Mixed</option>
+                                    <option {{ $pet->colour == 'Unknown' ? 'selected' : '' }} value="Unknown ">Unknown
+                                    </option>
                                 </select>
 
                                 @error('colour')
@@ -214,7 +251,7 @@
                                 @enderror
                             </div>
 
-                                      <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <div class="type-selection-label">
                                     <label>Does your pet have any special needs or medical conditions?
                                         <span>*</span>
@@ -222,40 +259,40 @@
                                 </div>
                                 <div class="form-group @error('iscomportable_other_pet') has-error @enderror radio-row">
                                     <label>
-                                        <input type="radio" {{ $pet->special_need == 'Yes' ? 'checked' : '' }} name="special_need" value="Yes"
-                                            onclick="toggleDetailsMedical(true)" >
+                                        <input type="radio" {{ $pet->special_need == 'Yes' ? 'checked' : '' }}
+                                            name="special_need" value="Yes" onclick="toggleDetailsMedical(true)">
                                         Yes
                                     </label>
 
                                     <label>
-                                        <input type="radio" {{ $pet->special_need == 'No' ? 'checked' : '' }} name="special_need" value="No"
-                                            onclick="toggleDetailsMedical(false)" >
+                                        <input type="radio" {{ $pet->special_need == 'No' ? 'checked' : '' }}
+                                            name="special_need" value="No" onclick="toggleDetailsMedical(false)">
                                         No
                                     </label>
 
-                                    
+
 
                                     @error('special_need')
                                         <small class="errors-msg">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                 @if ($pet->special_details !=null)
-                                <div class="type-selection-row" id="detailsBoxMedical" style="display: none;">
-                                    <div class="type-selection-label">
-                                        <label>Details
-                                        </label>
-                                    </div>
-                                    <div class="form-group @error('name') has-error @enderror">
-                                        <textarea name="special_details">{{$pet->special_details}}</textarea>
+                                @if ($pet->special_details != null)
+                                    <div class="type-selection-row" id="detailsBoxMedical" style="display: none;">
+                                        <div class="type-selection-label">
+                                            <label>Details
+                                            </label>
+                                        </div>
+                                        <div class="form-group @error('name') has-error @enderror">
+                                            <textarea name="special_details">{{ $pet->special_details }}</textarea>
 
-                                        @error('special_need')
-                                            <small class="errors-msg">{{ $message }}</small>
-                                        @enderror
+                                            @error('special_need')
+                                                <small class="errors-msg">{{ $message }}</small>
+                                            @enderror
 
+                                        </div>
                                     </div>
-                                </div>
                                 @endif
-                                 <div class="type-selection-row" id="detailsBoxMedical" style="display: none;">
+                                <div class="type-selection-row" id="detailsBoxMedical" style="display: none;">
                                     <div class="type-selection-label">
                                         <label>Details
                                         </label>
@@ -270,22 +307,28 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
 
                             <div class="col-md-6 mb-3">
-                               
-                                     <label>
-                                     How would you describe your pet’s personality? (Select one)
-                                      </label>
-                              
-                                  
 
-                                <select name="personality"  class="form-select @error('size') is-invalid @enderror" required>
-                                    <option  value="">Select pet personality</option>
-                                    <option {{ $pet->personality == 'Couch Potato' ? 'selected' : '' }} value="Couch Potato">🛋️ Couch Potato: Prefers lounging and relaxing; minimal activity needs.</option>
-                                    <option {{ $pet->personality == 'Energetic' ? 'selected' : '' }} value="Energetic">⚡ Energetic: Always on the go; loves playtime and adventures.</option>
-                                    <option {{ $pet->personality == 'Adaptable' ? 'selected' : '' }} value="Adaptable">⚖️ Adaptable: Comfortable with both playtime and relaxation; displays a balanced temperament.</option>
-                                    
+                                <label>
+                                    How would you describe your pet’s personality? (Select one)
+                                </label>
+
+
+
+                                <select name="personality" class="form-select @error('size') is-invalid @enderror"
+                                    required>
+                                    <option value="">Select pet personality</option>
+                                    <option {{ $pet->personality == 'Couch Potato' ? 'selected' : '' }}
+                                        value="Couch Potato">🛋️ Couch Potato: Prefers lounging and relaxing; minimal
+                                        activity needs.</option>
+                                    <option {{ $pet->personality == 'Energetic' ? 'selected' : '' }} value="Energetic">⚡
+                                        Energetic: Always on the go; loves playtime and adventures.</option>
+                                    <option {{ $pet->personality == 'Adaptable' ? 'selected' : '' }} value="Adaptable">⚖️
+                                        Adaptable: Comfortable with both playtime and relaxation; displays a balanced
+                                        temperament.</option>
+
 
                                 </select>
 
@@ -294,9 +337,9 @@
                                 @enderror
 
                             </div>
-                            
-                            
-  <!-- Pet Name -->
+
+
+                            <!-- Pet Name -->
                             <div class="col-md-6 mb-3">
                                 <label for="name" class="form-label">Weight</label>
                                 <input type="text" class="form-control @error('weight') is-invalid @enderror"
@@ -310,7 +353,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="price" class="form-label">Adoption fee</label>
                                 <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                    id="price" name="price"  value="{{ $pet->price }}">
+                                    id="price" name="price" value="{{ $pet->price }}">
                                 @error('price')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -383,7 +426,7 @@
                             </div>
 
 
-                       
+
 
 
 
@@ -684,20 +727,25 @@
 
                                 </div>
                             </div>
-                            
-                                
-                         
+
+
+
                             <div class="col-md-6 mb-3">
-                                <label for="dedicated_time" class="form-label">How much time does your pet typically require each day for companionship? (Helps us match them with a home that can meet their needs.)</label>
+                                <label for="dedicated_time" class="form-label">How much time does your pet typically
+                                    require each day for companionship? (Helps us match them with a home that can meet their
+                                    needs.)</label>
                                 <select name="dedicated_time" id="colour"
-                                    class="form-select @error('dedicated_time') is-invalid @enderror" >
-                                  
-                                      <option value="">-- Select --</option>
-                            <option {{ $pet->dedicated_time == 'Less than 1 hour' ? 'selected' : '' }} value="Less than 1 hour">🕒 Less than 1 hour</option>
-                            <option {{ $pet->dedicated_time == '1–3 hours' ? 'selected' : '' }} value="1–3 hours">🕒 1–3 hours
-                            </option>
-                            <option {{ $pet->dedicated_time == 'More than 3 hours' ? 'selected' : '' }} value="More than 3 hours">🕒 More than 3 hours
-                            </option>
+                                    class="form-select @error('dedicated_time') is-invalid @enderror">
+
+                                    <option value="">-- Select --</option>
+                                    <option {{ $pet->dedicated_time == 'Less than 1 hour' ? 'selected' : '' }}
+                                        value="Less than 1 hour">🕒 Less than 1 hour</option>
+                                    <option {{ $pet->dedicated_time == '1–3 hours' ? 'selected' : '' }}
+                                        value="1–3 hours">🕒 1–3 hours
+                                    </option>
+                                    <option {{ $pet->dedicated_time == 'More than 3 hours' ? 'selected' : '' }}
+                                        value="More than 3 hours">🕒 More than 3 hours
+                                    </option>
                                 </select>
 
                                 @error('dedicated_time')
@@ -705,7 +753,7 @@
                                 @enderror
                             </div>
 
-     <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="uk_state_id" class="form-label">Locations</label>
                                 <select name="uk_state_id" id="uk_state_id"
                                     class="form-select @error('uk_state_id') is-invalid @enderror" required>
@@ -751,14 +799,13 @@
                                             </div>
                                         @endif
                                     </div>
-                                     <div id="image-preview" class="mt-3 d-flex flex-wrap gap-2"></div>
+                                    <div id="image-preview" class="mt-3 d-flex flex-wrap gap-2"></div>
                                     @foreach ($petimages as $img)
-                                  
                                         <img src="{{ asset('images/') }}/{{ $img->image }}" alt=""
-                                            style="height: 50px;width:50px;"> 
-                                            
-                                            <a href="{{route('admin.image.delete',$img->id)}}"><i class="fas fa-trash-alt"></i>x</a>
-                                           
+                                            style="height: 50px;width:50px;">
+
+                                        <a href="{{ route('admin.image.delete', $img->id) }}"><i
+                                                class="fas fa-trash-alt"></i>x</a>
                                     @endforeach
 
                                     @error('images')
@@ -825,31 +872,31 @@
 
 @endsection
 @push('js')
-   <script>
-    document.getElementById('inputGroupFile03').addEventListener('change', function(event) {
-        const preview = document.getElementById('image-preview');
-        preview.innerHTML = ''; // Clear previous previews
+    <script>
+        document.getElementById('inputGroupFile03').addEventListener('change', function(event) {
+            const preview = document.getElementById('image-preview');
+            preview.innerHTML = ''; // Clear previous previews
 
-        const files = event.target.files;
+            const files = event.target.files;
 
-        if (files) {
-            Array.from(files).forEach(file => {
-                const reader = new FileReader();
+            if (files) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
 
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'rounded border';
-                    img.style.maxWidth = '150px';
-                    img.style.maxHeight = '150px';
-                    preview.appendChild(img);
-                }
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'rounded border';
+                        img.style.maxWidth = '150px';
+                        img.style.maxHeight = '150px';
+                        preview.appendChild(img);
+                    }
 
-                reader.readAsDataURL(file);
-            });
-        }
-    });
-</script>
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+    </script>
     <script type="text/javascript">
         // $(document).ready(function() {
         //     $("#category_id").change(function() {

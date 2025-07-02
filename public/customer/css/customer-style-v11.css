@@ -5158,9 +5158,9 @@ table.profile-settings tr td {
 	cursor: pointer;
 }
 
-.terms-conditions{
+/* .terms-conditions{
 	margin-top: 32px;
-}
+} */
 .type-selection-row .checkbox-row label{
 	font-size: 16px;
 	line-height: 28px;

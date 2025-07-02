@@ -26,7 +26,7 @@ class PetController extends Controller
      */
     public function index()
     {
-        
+
         Gate::authorize('pet_access');
         $pets = Pet::latest()->orderBy('isPublished', 'ASC')->get();
         return view('backend.pets.index', compact('pets'));
@@ -135,12 +135,12 @@ class PetController extends Controller
         ]);
 
         $manager = new ImageManager(new Driver());
-        
-              if ($request->images) {
-            $thumbnailName = uniqid() . '.webp'; 
+
+        if ($request->images) {
+            $thumbnailName = uniqid() . '.webp';
             $image = $manager->read($request->images[0]->getRealPath())
                 // ->cover(870, 493) 
-                ->toWebp(100); 
+                ->toWebp(100);
 
             // Storage::disk('public')->put('images/' . $thumbnailName, (string) $image);
             $imagePath = public_path('images/' . $thumbnailName);
@@ -152,7 +152,7 @@ class PetController extends Controller
             ]);
         }
 
-        
+
         if (!empty($request->images)) {
 
 
@@ -287,7 +287,7 @@ class PetController extends Controller
             // 'best_fit_for_home_deatils' => $request->best_fit_for_home_deatils,
             // 'need_outdoor_space' => $request->need_outdoor_space,
             // 'special_medical_care' => $request->special_medical_care,
-              'category_id' => $request->category_id,
+            'category_id' => $request->category_id,
             'sub_category_id' => $request->sub_category_id,
             'name' => $request->name,
             'charity_name_admin' => $request->charity_name_admin,
@@ -412,7 +412,7 @@ class PetController extends Controller
         $pet = Pet::findorfail($request->pet_id);
         $pet->update(['isPublished' => $request->published_status]);
         flash('Published Status Change Successfully.');
-        
+
         // if($request->published_status ==1)
         // {
         // $email = $pet->user->email;
@@ -421,15 +421,37 @@ class PetController extends Controller
         // }
         return back();
     }
-    
+
     public function imageDelete($id)
     {
-         $image = PetImage::findorfail($id);
-            $path = public_path('images/') . $image->image;
-            if (file_exists($path)) {
-                unlink($path);
-            }
-            $image->delete();
+        $image = PetImage::findorfail($id);
+        $path = public_path('images/') . $image->image;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         return back();
     }
+
+
+    // Show the sortable view
+    public function featuredChange(Request $request)
+    {
+        Gate::authorize('pet_edit'); // optional authorization
+
+        $request->validate([
+            'pet_id' => 'required|exists:pets,id',
+            'is_featured' => 'required|boolean',
+            'position' => 'sometimes|required|integer',
+        ]);
+
+        Pet::where('id', $request->pet_id)->update([
+            'is_featured' => $request->is_featured,
+            'position' => $request->position ?? 0,
+        ]);
+
+        return redirect()->back()->with('success', 'Featured status updated.');
+    }
+
+   
 }

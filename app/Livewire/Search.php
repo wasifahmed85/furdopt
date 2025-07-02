@@ -15,9 +15,9 @@ use Livewire\WithPagination;
 
 class Search extends Component
 {
-     use WithPagination;
+    use WithPagination;
     #[Title(' Search')]
-     
+
 
     public $search = '';
     public $categories;
@@ -115,7 +115,7 @@ class Search extends Component
 
     public function searchMatch()
     {
-       
+
         $this->pet_genderf = $this->pet_genders;
         $this->looking_forf = $this->looking_fors;
         $this->pet_agesf = $this->pet_ages;
@@ -126,7 +126,7 @@ class Search extends Component
         $this->looking_for_locationsf = $this->looking_for_locations;
         $this->colour = $this->colour;
         $this->weight = $this->weight;
-        $this->price_from =$this->price_from;
+        $this->price_from = $this->price_from;
         $this->price_to = $this->price_to;
     }
 
@@ -202,43 +202,47 @@ class Search extends Component
         //filter 
 
         // search
-//         if (!empty($this->looking_forsf)) {
-//             $query->where('category_id', $this->looking_forsf);
-//         }
-//         if (!empty($this->pet_gendersf)) {
-//             $query->where('gender', $this->pet_gendersf);
-//         }
-//         if (!empty($this->pet_ages)) {
-//             $query->where('age', $this->pet_ages);
-//         }
-//         if (!empty($this->weight)) {
-//             $query->where('weight', $this->weight);
-//         }
-//         if (!empty($this->price_from) && !empty($this->price_to)) {
-//     $query->whereBetween('price', [$this->price_from, $this->price_to]);
-// }
-//         if (!empty($this->looking_for_statesf)) {
-//             $query->where('uk_state_id', $this->looking_for_statesf);
-//         }
-//         if (!empty($this->sizesf)) {
-//             $query->where('size', $this->sizesf);
-//         }
-//         if (!empty($this->pet_personalitysf)) {
-//             $query->where('personality', $this->pet_personalitysf);
-//         }
-//         if (!empty($this->pet_sportssf)) {
-//             $query->where('sports', $this->pet_sportssf);
-//         }
+        //         if (!empty($this->looking_forsf)) {
+        //             $query->where('category_id', $this->looking_forsf);
+        //         }
+        //         if (!empty($this->pet_gendersf)) {
+        //             $query->where('gender', $this->pet_gendersf);
+        //         }
+        //         if (!empty($this->pet_ages)) {
+        //             $query->where('age', $this->pet_ages);
+        //         }
+        //         if (!empty($this->weight)) {
+        //             $query->where('weight', $this->weight);
+        //         }
+        //         if (!empty($this->price_from) && !empty($this->price_to)) {
+        //     $query->whereBetween('price', [$this->price_from, $this->price_to]);
+        // }
+        //         if (!empty($this->looking_for_statesf)) {
+        //             $query->where('uk_state_id', $this->looking_for_statesf);
+        //         }
+        //         if (!empty($this->sizesf)) {
+        //             $query->where('size', $this->sizesf);
+        //         }
+        //         if (!empty($this->pet_personalitysf)) {
+        //             $query->where('personality', $this->pet_personalitysf);
+        //         }
+        //         if (!empty($this->pet_sportssf)) {
+        //             $query->where('sports', $this->pet_sportssf);
+        //         }
 
-//         if (!empty($this->looking_for_locations)) {
-//             $query->where('location', 'LIKE', '%' . $this->looking_for_locations . '%');
-//         }
+        //         if (!empty($this->looking_for_locations)) {
+        //             $query->where('location', 'LIKE', '%' . $this->looking_for_locations . '%');
+        //         }
 
         // Step 3: Paginate filtered results (from the initial 5)
-        $matchedPets = $query->where('isPublished',1)->paginate(16);
+        $matchedPets = $query->where('isPublished', 1)
+            ->orderBy('is_featured', 'desc')
+            ->orderBy('position', 'asc', 'nulls_last')
+            ->orderBy('id', 'desc')
+            ->paginate(16);
         // $matchedPets2 = $query->paginate(6);
-        
-         
+
+
         return view('livewire.search', [
             'searchpets' => $matchedPets,
             'categories' => $this->categories,
@@ -246,6 +250,6 @@ class Search extends Component
             // 'breeds' => SubCategory::get(['id', 'slug', 'name', 'category_id']),
             // 'allBreeds' => SubCategory::where('status', 1)->get(['id', 'slug', 'name']),
             // 'recommanded' => Pet::where('status', 1)->get(['id', 'slug', 'name']),
-        ])->layout('components.layouts.app'); ;
+        ])->layout('components.layouts.app');;
     }
 }

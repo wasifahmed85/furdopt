@@ -442,6 +442,7 @@
                                              <li>{{$ad->breed->name ?? ''}}</li>
                                              <li>Age: {{ $ad->age ?? '' }}</li>
                                              <li>{{ $ad->gender }}</li>
+                                             <li>{{ $ad->created_at }}</li>
                                          </ul>
                                        
                                          <p>{!! Str::limit($ad->description, 200, '...') !!}</p>

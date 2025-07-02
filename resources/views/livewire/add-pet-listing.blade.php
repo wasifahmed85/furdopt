@@ -741,51 +741,7 @@
                                 </div>
 
                             </div>
-                            {{-- <div class="type-selection-item features">
-                            <div class="type-selection-head">
-                                <div class="type-selection-title">
-                                    <i class="rtcl-icon-s-tags"></i>
-                                    <h5>Features</h5>
-                                </div>
-                            </div>
-                            <div class="type-selection-row">
-                                <div class="type-selection-label">
-                                    <label>Features List<span>*</span></label>
-                                </div>
-                                <div class="form-group">
-                                    <textarea wire:model="feature_list" class="default-editor"></textarea>
-                                    <div class="help-block">
-                                        <ul>
-                                            <li>Write a feature in each line eg.</li>
-                                            <li>Feature 1</li>
-                                            <li>Feature 2</li>
-                                            <li>...</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                            {{-- <div class="type-selection-item">
-                            <div class="type-selection-head">
-                                <div class="type-selection-title">
-                                    <i class="rtcl-icon-s-tags"></i>
-                                    <h5>Images</h5>
-                                </div>
-                            </div>
-                            <div class="gallery-uploads">
-                                <h4>Thumbnail</h4>
-                                <div class="gallery-uploads-inner">
-                                    <label for="gallery-upload"><button class="gallery-upload-btn">Browse files
-                                            ...</button></label>
-                                    <input type="file" id="gallery-upload" wire:model="thumbnail">
-                                    @if ($thumbnail)
-                                        <img src="{{ $thumbnail->temporaryUrl() }}" height="100" width="100"
-                                            style="height: 50px;width:50px;">
-                                    @endif
-                                </div>
-                            </div>
 
-                        </div> --}}
                             <div class="type-selection-item">
                                 <div class="type-selection-head">
                                     <div class="type-selection-title">
@@ -793,28 +749,18 @@
                                         <h5>Upload pet picture<span>*</span></h5>
                                     </div>
                                 </div>
-                                <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
-                                    x-on:livewire-upload-finish="uploading = false"
-                                    x-on:livewire-upload-error="uploading = false"
-                                    x-on:livewire-upload-progress="progress = $event.detail.progress">
-                                    <div class="gallery-uploads thumbnail-add">
-                                        <h4>Drop files here to add them.</h4>
+
+                                <div class="gallery-uploads thumbnail-add">
+                                    <h4>Drop files here to add them.</h4>
 
 
-                                        <!--<input type="file" id="gallery-upload" wire:model="images"   multiple required>-->
-                                        <input type="file" wire:model="newImages" multiple
-                                            accept="image/jpeg,image/png,image/jpg,image/gif/webp" required="">
+                                    <!--<input type="file" id="gallery-upload" wire:model="images"   multiple required>-->
+                                    <input type="file" wire:model="newImages" multiple
+                                        accept="image/jpeg,image/png,image/jpg,image/gif/webp" required="">
 
 
 
 
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div x-show="uploading">
-                                            <progress max="100" x-bind:value="progress"></progress>
-                                        </div>
-                                    </div>
                                 </div>
                                 <p>Maximum image upload size is 10 MB</p>
                                 @error('newImages')
@@ -841,13 +787,9 @@
                                         @endforeach
                                     </div>
                                 @endif
-                                <!--<div class="uploads-alert mt-4" id="image-preview">-->
-                                <!--    </div>-->
+
 
                             </div>
-
-
-
 
                             <div class="type-selection-item">
 
@@ -887,6 +829,10 @@
 
                                     <div class="form-group">
 
+                                        <div class="checkbox-row ">
+                                            <input type="checkbox" id="checked-2" name="vehicle1" value="Bike">
+                                            <label for="checked-1">Promote this pet on social media for $9.99</label>
+                                        </div>
 
                                         <div class="checkbox-row terms-conditions">
                                             <input type="checkbox" id="checked-2" name="vehicle1" value="Bike">
@@ -910,7 +856,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
         </form>
     </div>
 </section>

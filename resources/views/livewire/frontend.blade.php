@@ -219,13 +219,27 @@
         <div class="common-wrap clear">
             <h3>Spotlighted Pets</h3>
 
-            <div class="gallery-grid">
+            <h2 class="text-xl font-bold" style="color:white;margin-bottom:20px">Featured Pets</h2>
 
+            {{-- <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                @forelse ($petss as $pet)
+                    <div class="border p-4 rounded shadow">
+                        <h3 class="text-lg font-semibold">{{ $pet->name }}</h3>
+                        <p>Age: {{ $pet->age }}</p>
+                        <p>Location: {{ $pet->location }}</p>
+                        <p>Status: {{ $pet->isPublished ? 'Published' : 'Pending' }}</p>
+                    </div>
+                @empty
+                    <p>No featured pets available.</p>
+                @endforelse
+            </div> --}}
+
+            <div class="gallery-grid">
                 @foreach ($spots as $pet)
                     <div class="gallery-card">
                         <div class="gallery-thumb">
                             <a href="{{ route('f.detail', $pet->slug) }}"> <img
-                                    src="{{ asset('images/' . $pet->images->first()->image ?? '') }}"
+                                    src="{{ asset('images/' . ($pet->images->isNotEmpty() ? $pet->images->first()->image : '')) }}"
                                     alt=""></a>
                             <!--<a href="{{ route('f.detail', $pet->slug) }}"> <img-->
                             <!--src="{{ asset('images/' . $pet->thumbnail) }}" alt=""></a>-->

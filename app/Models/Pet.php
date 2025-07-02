@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pet extends Model
 {
-    use Sluggable;
+    use Sluggable, HasFactory;
     protected $fillable = [
         'owner_id',
         'category_id',
@@ -72,8 +73,8 @@ class Pet extends Model
         'dedicated_time',
         'isPublished',
         'special_details',
+        'position',
     ];
-
 
 
     public function user()
@@ -94,7 +95,7 @@ class Pet extends Model
     {
         return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id')->withDefault();
     }
-    
+
 
     public function state()
     {

@@ -26,7 +26,7 @@ class Filter extends Component
     public $search = '';
     public $min_price = 0;
     public $max_price = 10000;
-   public $sortBy = 'newest';
+    public $sortBy = 'newest';
     public $location;
     public $gender = [];
     public $genderFemale;
@@ -97,14 +97,14 @@ class Filter extends Component
 
     public function clearAll()
     {
-        
+
         return redirect()->route('f.filter');
-    //     $this->selectedCategories = [];
-    // $this->selectedBreeds = [];
-    // $this->selectedLocations = [];
-    //     $this->reset();
-    //     $this->dispatch('clear-query-string');
-    // return Redirect::to('/filter');
+        //     $this->selectedCategories = [];
+        // $this->selectedBreeds = [];
+        // $this->selectedLocations = [];
+        //     $this->reset();
+        //     $this->dispatch('clear-query-string');
+        // return Redirect::to('/filter');
     }
 
     public function petLikes($id)
@@ -138,17 +138,17 @@ class Filter extends Component
         $category = Request::get('searchCategory', '');
         $breed = Request::get('searchBreed', '');
         $this->state = Request::get('searchLocation', '');
-        
+
         if (!empty($category)) {
-        $this->selectedCategories = explode(',', $category);
-    }
-        
+            $this->selectedCategories = explode(',', $category);
+        }
+
         if (!empty($breed)) {
-        $this->selectedBreeds = explode(',', $breed);
-    }
+            $this->selectedBreeds = explode(',', $breed);
+        }
         if (!empty($state)) {
-        $this->selectState = explode(',', state);
-    }
+            $this->selectState = explode(',', state);
+        }
 
 
         $this->categoires = Category::where('id', $this->selectedCategory)->first();
@@ -160,8 +160,7 @@ class Filter extends Component
     {
 
 
-        $query = Pet::query();
-
+        $query = Pet::query()->where('isPublished', 1);
 
         if ($this->selectedCategory) {
             $query->where('category_id', $this->selectedCategory);
@@ -194,7 +193,7 @@ class Filter extends Component
                 $q->where('name', 'like', '%' . $this->breedName . '%');
             });
         }
-        
+
         if ($this->verifiedBreeders) {
             $query->whereHas('userd', function ($q) {
                 $q->where('verify_breeder_status', 1);
@@ -220,7 +219,7 @@ class Filter extends Component
             $query->where('colour', $this->colour);
         }
         if ($this->age) {
-            $query->where('colour', $this->age);
+            $query->where('age', $this->age);
         }
 
         if ($this->weight) {
@@ -251,15 +250,19 @@ class Filter extends Component
         //         default => 'desc',
         //     }
         // );
-        
-        $orderColumn = $this->sortBy === 'lowest' || $this->sortBy === 'highest' ? 'price' : 'created_at';
+
+        $orderColumn = $this->sortBy === 'lowest' || $this->sortBy === 'higest' ? 'price' : 'created_at';
         $orderDirection = $this->sortBy === 'oldest' || $this->sortBy === 'lowest' ? 'asc' : 'desc';
-        $query->orderBy($orderColumn, $orderDirection);
 
-        $ads = $query->withCount('images')->where('isPublished',1)->paginate(6);
-   
+        $query->orderBy('is_featured', 'desc') // Always puts featured items first (1s before 0s)
+            ->orderBy($orderColumn, $orderDirection)
+            ->orderBy('position', 'asc', 'nulls_last')
+            ->orderBy('id', 'desc');
 
-        $spot = $query->withCount('images')->where('isPublished',1)
+        $ads = $query->withCount('images')->paginate(6);
+
+
+        $spot = $query->withCount('images')->where('isPublished', 1)
             ->whereHas('spotlight', function ($query) {
                 $query->whereDate('end_date', '>=', now()); // Exclude expired spotlights
             })
@@ -280,7 +283,7 @@ class Filter extends Component
 
         $excludedIds = $ads->pluck('id')->toArray();
 
-        
+
 
 
         $allBreeds = SubCategory::where('status', 1)->get(['id', 'slug', 'name']);
@@ -295,8 +298,8 @@ class Filter extends Component
                 ->take($this->perPage)
                 ->get();
         }
-        
-     
+
+
 
 
         $totalRecords = SubCategory::whereIn('category_id', $this->selectedCategories)->count();
@@ -305,12 +308,12 @@ class Filter extends Component
         return view('livewire.filter', [
             'ads' => $ads,
             'spotlights' =>  $spot,
-         
+
             'categories' => Category::get(['id', 'slug', 'name']),
             'breeds' => $subCategories,
             'states' => UkState::get(['id', 'state']),
             'allBreeds' => SubCategory::where('status', 1)->get(['id', 'slug', 'name']),
-            
+
         ]);
     }
 }

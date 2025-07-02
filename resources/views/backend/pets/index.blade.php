@@ -65,11 +65,7 @@
                                         <th class="text-center">Category</th>
                                         <th class="text-center">Breed</th>
 
-
-
-
-
-
+                                        <th class="text-center">Featured</th>
                                         <th class="text-center">status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -80,31 +76,73 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
 
-
-                                            <td>{{ $pet->name }}</td>
+                                            <td data-id="{{ $pet->id }}"
+                                                style="margin:4px 0;padding:8px;border:1px solid #ddd;cursor:move;">
+                                                {{ $pet->name }}</td>
                                             <td>{{ $pet->user->name }}</td>
-                                            <!--<td >{{ $pet->user?->subscription?->plan?->name }}</td>-->
+                                            {{-- --}}
                                             <td>{{ $pet->category->name ?? '' }}</td>
                                             <td>{{ $pet->breed->name ?? '' }}</td>
+                                            <td>
+                                                <form method="post" action="{{ route('admin.pet.featuredchange') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="pet_id" value="{{ $pet->id }}">
+                                                    <select name="is_featured" id="is_featured_{{ $pet->id }}"
+                                                        onchange="
+                        var positionSelect = this.form.querySelector('#position_{{ $pet->id }}');
+                        if (this.value == 0) {
+                            positionSelect.disabled = true;
+                            positionSelect.classList.add('d-none');
+                        } else {
+                            positionSelect.disabled = false;
+                            positionSelect.classList.remove('d-none');
+                        }
+                        this.form.submit();
+                    "
+                                                        class="form-control">
+                                                        <option value="1" @selected($pet->is_featured == 1)>Featured
+                                                        </option>
+                                                        <option value="0" @selected($pet->is_featured == 0)>NotFeatured
+                                                        </option>
+                                                    </select>
+                                                    <select name="position" id="position_{{ $pet->id }}"
+                                                        {{ $pet->is_featured == 0 ? 'disabled' : '' }}
+                                                        onchange="this.form.submit()"
+                                                        class="form-control position {{ $pet->is_featured == 0 ? 'd-none' : '' }}">
+                                                        @for ($i = 1; $i <= 20; $i++)
+                                                            @if (App\Models\Pet::where('is_featured', 1)->where('position', $i)->where('id', '!=', $pet->id)->first())
+                                                                @continue
+                                                            @endif
+                                                            <option value="{{ $i }}"
+                                                                @selected($pet->position == $i)>
+                                                                {{ $i }}
+                                                            </option>
+                                                        @endfor
+                                                    </select>
+
+                                                </form>
+
+                                            </td>
 
 
                                             <td>
-                                                                    <form method="post" action="{{route('admin.pet.statuschange')}}">
-                                @csrf
-                                <input type="hidden" name="pet_id" value="{{$pet->id}}">
-                            <div class="col-12">
-                               
-                         
-                                <select name="published_status"  class="form-control mb-2" onchange="this.form.submit()">
-                                 
-                                 
-                                  <option value="1" @if($pet->isPublished == 1) selected @endif>Published</option>
-                                  <option value="0" @if($pet->isPublished == 0) selected @endif>Pending</option>
-                                 
-                                </select> 
+                                                <form method="post" action="{{ route('admin.pet.statuschange') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="pet_id" value="{{ $pet->id }}">
+                                                    <div class="col-12">
+                                                        <select name="published_status" class="form-control mb-2"
+                                                            onchange="this.form.submit()">
+                                                            <option value="1"
+                                                                @if ($pet->isPublished == 1) selected @endif>Published
+                                                            </option>
+                                                            <option value="0"
+                                                                @if ($pet->isPublished == 0) selected @endif>Pending
+                                                            </option>
 
-                          </div>
-                            </form>
+                                                        </select>
+
+                                                    </div>
+                                                </form>
                                             </td>
 
 
@@ -132,8 +170,6 @@
                                                         <span>Delete</span>
                                                     </button>
                                                 </form>
-
-
 
                                             </td>
                                         </tr>
@@ -164,6 +200,18 @@
 
 
 @push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var is_featured = document.getElementById('is_featured');
+            var position = document.getElementById('position');
+
+            is_featured.addEventListener('change', function() {
+                position.disabled = this.value === '0';
+                position.classList.toggle('d-none', this.value === '0');
+                this.form.submit();
+            });
+        })
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.min.js"></script>

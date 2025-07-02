@@ -40,10 +40,11 @@
     36 => 'Termwind\\Laravel\\TermwindServiceProvider',
     37 => 'Pest\\Laravel\\PestServiceProvider',
     38 => 'Flasher\\Laravel\\FlasherServiceProvider',
-    39 => 'Spatie\\BackupServer\\BackupServerServiceProvider',
-    40 => 'Srmklive\\PayPal\\Providers\\PayPalServiceProvider',
-    41 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    42 => 'App\\Providers\\AppServiceProvider',
+    39 => 'Spatie\\EloquentSortable\\EloquentSortableServiceProvider',
+    40 => 'Spatie\\BackupServer\\BackupServerServiceProvider',
+    41 => 'Srmklive\\PayPal\\Providers\\PayPalServiceProvider',
+    42 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    43 => 'App\\Providers\\AppServiceProvider',
   ),
   'eager' => 
   array (
@@ -70,10 +71,11 @@
     20 => 'Termwind\\Laravel\\TermwindServiceProvider',
     21 => 'Pest\\Laravel\\PestServiceProvider',
     22 => 'Flasher\\Laravel\\FlasherServiceProvider',
-    23 => 'Spatie\\BackupServer\\BackupServerServiceProvider',
-    24 => 'Srmklive\\PayPal\\Providers\\PayPalServiceProvider',
-    25 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    26 => 'App\\Providers\\AppServiceProvider',
+    23 => 'Spatie\\EloquentSortable\\EloquentSortableServiceProvider',
+    24 => 'Spatie\\BackupServer\\BackupServerServiceProvider',
+    25 => 'Srmklive\\PayPal\\Providers\\PayPalServiceProvider',
+    26 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    27 => 'App\\Providers\\AppServiceProvider',
   ),
   'deferred' => 
   array (

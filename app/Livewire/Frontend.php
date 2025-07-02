@@ -10,6 +10,7 @@ use App\Models\PetSoptlight;
 use App\Models\UkState;
 use App\Models\NewsletterSubscription;
 use App\Models\SubCategory;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -64,7 +65,6 @@ class Frontend extends Component
             $this->success = 'This Email Already Subscriberd For News Letter';
         }
         $this->email = '';
-
     }
 
 
@@ -89,7 +89,6 @@ class Frontend extends Component
         } else {
             return redirect()->route('f.filter');
         }
-
     }
 
     public function petLikes($id)
@@ -125,8 +124,6 @@ class Frontend extends Component
 
             return redirect()->route('f.login');
         }
-
-
     }
 
     public function render()
@@ -164,7 +161,7 @@ class Frontend extends Component
         }
 
         $this->cities = UkState::select(['id', 'state'])->get();
-        $this->spots = Pet::where('isPublished', 1)->take(16)->get();
+        $this->spots = Pet::where('isPublished', 1)->where('is_featured', 1)->orderBy('position', 'asc')->take(16)->get();
         //  $this->spots  = Pet::get();
         //  $this->spots  = $spots;
 
