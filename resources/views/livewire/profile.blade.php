@@ -5,6 +5,45 @@
              <div class="my-profile-grid">
                  <div class="my-profile-inner">
                      <div class="my-profile-row">
+
+                         <div class="cta-group my-profile-head">
+                             <a href="{{ route('f.search') }}" wire:navigate class="search">Explore Pets</a>
+                             <a href="{{ route('f.match') }}" wire:navigate class="match">Match Now</a>
+                         </div>
+
+                         <style>
+                             .my-profile-inner .cta-group {
+                                 justify-content: space-between;
+                                 gap: 10px;
+                                 align-items: center;
+                                 margin-bottom: 20px;
+                                 display: none;
+                             }
+                             .my-profile-inner .cta-group .search {
+                                 background-color: #020202;
+                                 color: #ffffff;
+                                 padding: 10px 15px;
+                                 border-radius: 5px;
+                                 flex-grow: 1;
+                                 text-align: center;
+                             }
+                             .my-profile-inner .cta-group .match {
+                                 background-color: transparent;
+                                 color: #020202;
+                                 border: 2px solid #020202;
+                                 padding: 10px 15px;
+                                 border-radius: 5px;
+                                 flex-grow: 1;
+                                 text-align: center;
+                             }
+
+                             @media screen and (max-width: 1024px) {
+                                 .my-profile-inner .cta-group {
+                                     display: flex;
+                                 }
+                             }
+                         </style>
+
                          <div class="my-profile-head">
                              <h3>FurDopt Profile</h3>
                              @if($editdata)

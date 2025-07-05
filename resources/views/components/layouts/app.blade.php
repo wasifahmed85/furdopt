@@ -386,6 +386,42 @@
                         @endauth
                     </div>
                 </div>
+                 <div class="header-cta-group">
+                    <a href="{{url('/')}}" class="home">Home</a>
+                    <a href="{{ route('f.petlisting') }}" class="your-pets">Edit Your Pets</a>
+                </div>
+
+                <style>
+                    header .header-cta-group {
+                        width: 100%;
+                        justify-content: space-between;
+                        gap: 10px;
+                        align-items: center;
+                        margin-bottom: 20px;
+                        display: none;
+                    }
+
+                    header .header-cta-group .home {
+                        color: #ffffff;
+                        padding: 2px 10px;
+                        border-radius: 5px;
+                        text-align: center;
+                        border: 2px solid #ffffff;
+                    }
+
+                    header .header-cta-group .your-pets {
+                        color: #ffffff;
+                        padding: 2px 10px;
+                        border-radius: 5px;
+                        text-align: center;
+                        border: 2px solid #ffffff;  
+                    }
+                    @media screen and (max-width: 1024px) {
+                        header .header-cta-group {
+                            display: flex;
+                        }
+                    }
+                </style>
             </div>
         </header>
         <!-- //End header section -->
