@@ -74,8 +74,14 @@ class Pet extends Model
         'isPublished',
         'special_details',
         'position',
+        'is_promote',
     ];
+    
 
+    public function promotePayments()
+    {
+        return $this->hasMany(PromotePayment::class);
+    }
 
     public function user()
     {

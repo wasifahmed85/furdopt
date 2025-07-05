@@ -127,13 +127,6 @@
       0 => 'Flasher\\Laravel\\FlasherServiceProvider',
     ),
   ),
-  'spatie/eloquent-sortable' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\EloquentSortable\\EloquentSortableServiceProvider',
-    ),
-  ),
   'spatie/laravel-backup-server' => 
   array (
     'aliases' => 

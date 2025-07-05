@@ -144,4 +144,9 @@ public function lastMessage()
     {
         return $this->receivedChats()->where('is_seen', 0)->where('user_id', Auth::user()->id);
     }
+
+    public function promotePayments()
+    {
+        return $this->hasMany(PromotePayment::class);
+    }
 }

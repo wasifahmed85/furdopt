@@ -23,11 +23,14 @@ use Illuminate\Support\Facades\File;
 use Mail;
 use App\Mail\NewPetListingEmail;
 use App\Mail\PetListingPublishedMail;
+use Illuminate\Support\Facades\Crypt;
+use Livewire\Attributes\Locked;
 
 class AddPetListing extends Component
 {
     use WithFileUploads;
 
+    public bool $isPromoted = false;
 
     #[Title(' Pet Listing Add')]
     public $showPriceType = 1;
@@ -273,6 +276,7 @@ class AddPetListing extends Component
             'iscomportable_other_pet_cat_details' => $this->iscomportable_other_pet_cat_details,
             'iscomportable_others_pets' => $this->iscomportable_others_pets,
             'dedicated_time' => $this->dedicated_time,
+            'is_promote' => $this->isPromoted,
         ]);
 
         $randomNo = Str::random(6);
@@ -296,8 +300,13 @@ class AddPetListing extends Component
 
         // Show success message and redirect immediately
         session()->flash('message', 'Pet listing created successfully! Images are being processed and emails will be sent shortly.');
-        $this->reset();
-        return $this->redirect('/pet/listing');
+        if ($this->isPromoted) {
+            $this->reset();
+            return $this->redirect(route('f.promote.payment', ['id' => Crypt::encryptString($store->id)]), navigate: true);
+        } else {
+            $this->reset();
+            return $this->redirect('/pet/listing');
+        }
     }
 
 

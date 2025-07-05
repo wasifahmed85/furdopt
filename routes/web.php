@@ -56,6 +56,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
+use App\Livewire\PromotePayment;
+use App\Http\Controllers\PromotePaymentController;
 
 Route::fallback(function () {
     return view('errors.404')->with('message', 'Page Not Found');
@@ -86,7 +88,7 @@ Route::middleware(['VisitorCount'])->group(function () {
     Route::get('/', Frontend::class)->name('f.index');
     Route::get('/frontend/login', Login::class)->name('f.login');
     Route::get('/frontend/register', Register::class)->name('f.register');
-  
+
     Route::get('/advertise', Advertise::class)->name('f.advert');
     Route::get('/error', Error::class)->name('f.aboutus');
     Route::get('/aboutUs', AboutUs::class)->name('f.aboutus');
@@ -104,8 +106,8 @@ Route::middleware(['VisitorCount'])->group(function () {
 
 // Route::middleware(['user', 'verified'])->group(function () {
 Route::middleware(['user'])->group(function () {
-      Route::get('/filter', Filter::class)->name('f.filter');
-    
+    Route::get('/filter', Filter::class)->name('f.filter');
+
     Route::get('/pet/listing', PetListing::class)->name('f.petlisting');
     Route::get('/pet/listing/add', AddPetListing::class)->name('f.petlisting.add');
     Route::get('/pet/listing/edit/{id}', EditPetListing::class)->name('f.petlisting.edit');
@@ -146,6 +148,15 @@ Route::middleware(['user'])->group(function () {
     Route::get('stripe/cancel', [PaymentController::class, 'cancelStripe'])->name('stripe.cancel');
     Route::get('paypal/payment/success', [PaymentController::class, 'paymentSuccessPaypal'])->name('paypal.payment.success');
     Route::get('paypal/payment/cancel', [PaymentController::class, 'stripePaymentCancel'])->name('paypal.payment.cancel');
+
+    Route::get('/promote/payment/{id}', PromotePayment::class)->name('f.promote.payment');
+    Route::controller(PromotePaymentController::class)->name('f.promote.')->prefix('promote')->group(function () {
+        Route::get('/checkout', 'checkout')->name('checkout');
+        Route::get('/stripe/success', 'successStripe')->name('stripe.success');
+        Route::get('/stripe/cancel', 'cancelStripe')->name('stripe.cancel');
+        Route::get('/paypal/success', 'successPaypal')->name('paypal.success');
+        Route::get('/paypal/cancel', 'cancelPaypal')->name('paypal.cancel');
+    });
 });
 
 

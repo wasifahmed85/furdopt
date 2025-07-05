@@ -37,7 +37,7 @@ class PaymentSuccessMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emals.success-payment',
+            view: 'emails.success-payment',
         );
     }
 

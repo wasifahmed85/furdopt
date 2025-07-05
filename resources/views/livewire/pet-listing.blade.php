@@ -17,7 +17,8 @@
                                         class="jws-icon-magnifying-glass"></i></button>
                             </div>
                         </form>
-                        <a href="{{ route('f.petlisting.add') }}" wire:navigate class="btn black"><i class="plussmall-icon"></i> Rehome Your Pet</a>
+                        <a href="{{ route('f.petlisting.add') }}" wire:navigate class="btn black"><i
+                                class="plussmall-icon"></i> Rehome Your Pet</a>
                     </div>
                     <div class="no-data-found">
 
@@ -33,48 +34,52 @@
                                 </tr>
                             </thead>
                             @if ($errors)
-                                <p>{{ $errors }} <a href="{{route('f.subscription')}}"><strong>  > Buy Spotlight</strong></a> </p>
+                                <p>{{ $errors }} <a href="{{ route('f.subscription') }}"><strong> > Buy
+                                            Spotlight</strong></a> </p>
                             @endif
                             <tbody>
                                 @foreach ($pets as $pet)
                                     <tr>
                                         <td>
                                             <div class="listing-thumb">
-                                                <a href="{{ route('f.detail', $pet->slug) }}"><img src="{{ asset('images') }}/{{ $pet->images->first()->image ?? '' }}"
+                                                <a href="{{ route('f.detail', $pet->slug) }}"><img
+                                                        src="{{ asset('images') }}/{{ $pet->images->first()->image ?? '' }}"
                                                         alt=""></a>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="ad-details">
-                                                <a class="listing-title" href="{{ route('f.detail', $pet->slug) }}">{{ $pet->name }} </a>
-                                                
+                                                <a class="listing-title"
+                                                    href="{{ route('f.detail', $pet->slug) }}">{{ $pet->name }} </a>
+
                                                 <ul class="meta-list">
-                                                   
+
                                                     <li>
                                                         @if ($pet->spotlight->isNotEmpty())
-                                                          <span class="pending"> Spotligt </span>
+                                                            <span class="pending"> Spotligt </span>
                                                         @else
-                                                            
                                                         @endif
                                                     </li>
                                                     <li>
-                                                        <img src="{{asset('customer')}}/svgs/my-listing/eye.svg" alt="">
+                                                        <img src="{{ asset('customer') }}/svgs/my-listing/eye.svg"
+                                                            alt="">
                                                         {{ $pet->views }} Views
                                                     </li>
-                                                   
+
                                                     <li>
-                                                        <img src="{{asset('customer')}}/svgs/my-listing/tele.svg"
+                                                        <img src="{{ asset('customer') }}/svgs/my-listing/tele.svg"
                                                             alt="">{{ $pet->like }} Favourite
                                                     </li>
                                                 </ul>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="price-amount">{{$pet->price}}</span>
+                                            <span class="price-amount">{{ $pet->price }}</span>
                                         </td>
                                         <!--<td class="expires-on"></td>-->
                                         <td>
-                                            <span class="pending">{{$pet->isPublished == 1 ? 'live':'Pending'}}</span>
+                                            <span
+                                                class="pending">{{ $pet->isPublished == 1 ? 'live' : 'Pending' }}</span>
                                         </td>
                                         <td>
                                             <div class="actions-wrap">
@@ -97,9 +102,22 @@
                                                             <li>
                                                                 <a style="cursor: pointer"
                                                                     wire:click="addToSpotLight({{ $pet->id }})">
-                                                                    <img src="{{asset('customer')}}/svgs/my-listing/promote.svg"
+                                                                    <img src="{{ asset('customer') }}/svgs/my-listing/promote.svg"
                                                                         alt="">
                                                                     <span>Add To Spotligt</span>
+                                                                </a>
+                                                            </li>
+                                                        @endif
+
+                                                        @if ($pet->is_promote == 1)
+                                                            <li>
+                                                                <a href="javascript:void(0)"
+                                                                    @if ($pet->promotePayments->isEmpty() || $pet->promotePayments->first()->status !== 'COMPLETED') wire:click="promotePayment({{ $pet->id }})" @endif>
+                                                                    <img src="{{ asset('customer') }}/svgs/my-listing/check-mark.svg"
+                                                                        alt="">
+                                                                    <span>Promote</span>
+                                                                    {{-- Also update the text to reflect the actual status --}}
+                                                                    <strong>({{ $pet->promotePayments->isNotEmpty() ? ($pet->promotePayments->first()->status === 'COMPLETED' ? 'Paid' : 'Pending/Other') : 'UnPaid' }})</strong>
                                                                 </a>
                                                             </li>
                                                         @endif
@@ -107,14 +125,16 @@
                                                         <li>
                                                             <a href="{{ route('f.petlisting.edit', $pet->id) }}"
                                                                 wire:navigate>
-                                                                <img src="{{asset('customer')}}/svgs/my-listing/edit.svg" alt="">
+                                                                <img src="{{ asset('customer') }}/svgs/my-listing/edit.svg"
+                                                                    alt="">
                                                                 <span>Edit</span>
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="#"
                                                                 wire:click="petDelete({{ $pet->id }})">
-                                                                <img src="{{asset('customer')}}/svgs/my-listing/delete.svg" alt="">
+                                                                <img src="{{ asset('customer') }}/svgs/my-listing/delete.svg"
+                                                                    alt="">
                                                                 <span>Delete</span>
                                                             </a>
                                                         </li>

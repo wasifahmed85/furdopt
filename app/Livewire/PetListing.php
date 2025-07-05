@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Crypt;
 
 class PetListing extends Component
 {
@@ -67,7 +68,11 @@ class PetListing extends Component
         $pet->delete();
     }
 
-
+    public function promotePayment($id)
+    {
+        $encryptedId = Crypt::encryptString($id);
+        return $this->redirect(route('f.promote.payment', ['id' => $encryptedId]), navigate: true);
+    }
 
     public function render()
     {
@@ -76,7 +81,7 @@ class PetListing extends Component
             // 'pets' => Pet::with('spotlight')->where('owner_id', Auth::user()->id)->latest()->paginate(3)
             'pets' => Pet::with(['spotlight' => function ($query) {
                 $query->limit(1);
-            }])->where('owner_id', Auth::user()->id)->latest()->paginate(3)
+            }, 'promotePayments'])->where('owner_id', Auth::user()->id)->latest()->paginate(3)
         ]);
     }
 }

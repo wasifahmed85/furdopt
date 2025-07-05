@@ -56,6 +56,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.promote-pets.index') }}"
+                        class="nav-link {{ request()->is(['admin/promote-pets*']) ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-card-text"></i>
+                        <p>Promote Pets</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.subscriptionPlans.index') }}"
                         class="nav-link {{ request()->is(['admin/subscriptionPlans*']) ? 'active' : '' }}">
                         <i class="nav-icon bi bi-card-text"></i>
