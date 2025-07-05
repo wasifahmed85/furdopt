@@ -828,19 +828,19 @@
                                 <div class="type-selection-row terms-conditions-wrap">
 
                                     <div class="form-group">
-                                        <div class="checkbox-row ">
+                                        {{-- <div class="checkbox-row ">
                                             <input type="checkbox" id="checked-2" wire:model="isPromoted">
                                             <label for="checked-1">Promote this pet on social media for $9.99</label>
-                                        </div>
+                                        </div> --}}
 
-                                         <div class="checkbox-row ">
+                                         {{-- <div class="checkbox-row ">
                                             <input type="checkbox" id="checked-2" wire:model="isPromoted">
                                             <label for="checked-1">Promote my pet on @FurDopt’s Instagram Story &
                                                 Facebook Group (Optional)
                                                 <br>
                                                 Boost visibility by sharing your pet with our engaged adoption community
                                                 across social media.</label>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="checkbox-row terms-conditions">
                                             <input type="checkbox" id="checked-2" name="vehicle1" value="Bike">

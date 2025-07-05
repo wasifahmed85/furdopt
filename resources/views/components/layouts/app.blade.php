@@ -23,9 +23,9 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('customer/css/swiper-bundle.min.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('customer/css/selectric.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('customer/css/custom.css') }}">
-   
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-     <link type="text/css" rel="stylesheet" href="{{ asset('customer/css/customer-style-v11.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('customer/css/customer-style-v11.css') }}">
 
     <title>{{ $title ?? 'FurDopt' }}</title>
 
@@ -76,55 +76,58 @@
             display: flex !important;
         }
     </style>
-    
-   <!-- Style for landing page-->
+
+    <!-- Style for landing page-->
     <style>
-        .landing-header .main-nav{
-            padding-right: 70px; 
+        .landing-header .main-nav {
+            padding-right: 70px;
             margin: 0 auto;
             width: calc(100% - 161px);
         }
-       .landing-header .user-profile-menu {
+
+        .landing-header .user-profile-menu {
             margin-left: auto;
             width: 161px;
         }
-        
-       .landing-header .main-nav ul{
-           width: 100%;
-           text-align: center;
-       }
-       .landing-header .main-nav ul li{
-           float: none;
-       }
-        
-        
-    @media only screen and (min-width: 280px) and (max-width: 991px){
-          .landing-header .main-nav{
-             width:100%;
-             padding-right: 0;
-         }
-          .landing-header .main-nav ul{
-              justify-content: center;
-          }
-         .landing-header .main-nav ul li:not(:nth-child(2)){
-             display: none;
-         }
-          .landing-header .user-profile-menu{
-              width:auto;
-          }
-     }
-   
-        
+
+        .landing-header .main-nav ul {
+            width: 100%;
+            text-align: center;
+        }
+
+        .landing-header .main-nav ul li {
+            float: none;
+        }
+
+
+        @media only screen and (min-width: 280px) and (max-width: 991px) {
+            .landing-header .main-nav {
+                width: 100%;
+                padding-right: 0;
+            }
+
+            .landing-header .main-nav ul {
+                justify-content: center;
+            }
+
+            .landing-header .main-nav ul li:not(:nth-child(2)) {
+                display: none;
+            }
+
+            .landing-header .user-profile-menu {
+                width: auto;
+            }
+        }
     </style>
-    
+
     @stack('css')
-    
+
     {{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> --}}
     @livewireStyles
 </head>
 
 <body>
- 
+
 
     <main class="main-wrap">
         <!--  Beginning header section -->
@@ -146,7 +149,7 @@
                         @auth
                             <nav class="main-nav desk">
                                 <ul>
-          
+
                                     <li>
                                         <a href="{{ route('f.search') }}">
                                             <div class="menu-icon">
@@ -155,20 +158,20 @@
                                             <div class="menu-text">Search</div>
                                         </a>
                                     </li>
-                                    
-                                
-                                    
+
+
+
                                     <li>
                                         <a href="{{ route('f.petlisting.add') }}">
                                             <div class="menu-icon">
-                                               <i class="plussmall-icon"></i>
+                                                <i class="plussmall-icon"></i>
                                             </div>
                                             <div class="menu-text">Rehome Your Pet</div>
                                         </a>
 
                                     <li>
                                         <a href="{{ route('f.match') }}">
-                                          
+
                                             <div class="menu-icon">
                                                 <i class="jws-icon-head-heart-child"></i>
                                             </div>
@@ -176,17 +179,20 @@
                                         </a>
                                     </li>
                                     <li>
-                                        @if(Auth::check())
-                                        @php
-                                         $countMsg = App\Models\Chatmessage::where('receiver_id', Auth::user()->id)
-            ->where('is_seen', 0)
-            ->count();
-                                        @endphp
+                                        @if (Auth::check())
+                                            @php
+                                                $countMsg = App\Models\Chatmessage::where(
+                                                    'receiver_id',
+                                                    Auth::user()->id,
+                                                )
+                                                    ->where('is_seen', 0)
+                                                    ->count();
+                                            @endphp
                                         @endif
                                         <a href="{{ route('f.chat') }}">
-                                            @if($countMsg > 0)
-                                             <span class="messageCount">{{$countMsg}}</span>
-                                             @endif
+                                            @if ($countMsg > 0)
+                                                <span class="messageCount">{{ $countMsg }}</span>
+                                            @endif
                                             <div class="menu-icon">
                                                 <i class="jws-icon-chatcircle"></i>
                                             </div>
@@ -201,11 +207,11 @@
                                             <div class="menu-text">My favourite</div>
                                         </a>
                                     </li>
-                                 
+
 
                                 </ul>
                             </nav>
-                    <nav class="main-nav mobi">
+                            <nav class="main-nav mobi">
                                 <ul>
 
                                     <li>
@@ -216,11 +222,11 @@
                                             <div class="menu-text">Search</div>
                                         </a>
                                     </li>
-                                    
+
                                     <li>
                                         <a href="{{ route('f.petlisting.add') }}">
                                             <div class="menu-icon">
-                                               <i class="plussmall-icon"></i>
+                                                <i class="plussmall-icon"></i>
                                             </div>
                                             <div class="menu-text">Rehome</div>
                                         </a>
@@ -228,7 +234,7 @@
 
                                     <li>
                                         <a href="{{ route('f.match') }}">
-                                          
+
                                             <div class="menu-icon">
                                                 <i class="jws-icon-head-heart-child"></i>
                                             </div>
@@ -236,17 +242,20 @@
                                         </a>
                                     </li>
                                     <li>
-                                        @if(Auth::check())
-                                        @php
-                                         $countMsg = App\Models\Chatmessage::where('receiver_id', Auth::user()->id)
-            ->where('is_seen', 0)
-            ->count();
-                                        @endphp
+                                        @if (Auth::check())
+                                            @php
+                                                $countMsg = App\Models\Chatmessage::where(
+                                                    'receiver_id',
+                                                    Auth::user()->id,
+                                                )
+                                                    ->where('is_seen', 0)
+                                                    ->count();
+                                            @endphp
                                         @endif
                                         <a href="{{ route('f.chat') }}">
-                                            @if($countMsg > 0)
-                                             <span class="messageCount">{{$countMsg}}</span>
-                                             @endif
+                                            @if ($countMsg > 0)
+                                                <span class="messageCount">{{ $countMsg }}</span>
+                                            @endif
                                             <div class="menu-icon">
                                                 <i class="jws-icon-chatcircle"></i>
                                             </div>
@@ -327,13 +336,13 @@
                                         <li class="dropdown-menu-item">
                                             <a href="{{ route('f.setting') }}"><i class="jws-icon-gear"></i> Settings</a>
                                         </li>
-                                         
+
                                         <li class="dropdown-menu-item">
                                             <a href="{{ route('f.chat') }}"><i class="jws-icon-chatcircledot"></i>
                                                 Messages</a>
                                         </li>
-                                        
-                                     
+
+
                                         <li class="dropdown-menu-item">
                                             <a href="{{ route('f.subscription') }}"><i
                                                     class="jws-icon-crownsimple-m"></i>
@@ -344,8 +353,8 @@
                                                 <img src="{{ asset('customer') }}/svgs/spotlight2.svg" width="26">
                                                 My Spotlight</a>
                                         </li>
-                                        
-                                      
+
+
                                         <li class="dropdown-menu-item">
                                             <a href="{{ route('f.logout') }}"><i class="jws-icon-export"></i>Log Out</a>
                                         </li>
@@ -353,41 +362,41 @@
                                 </div>
                             </div>
                         @else
-                            
                             <div class="profile">
-                                  @auth
-                            
-                        @else
-                            
-                        @endauth  @auth
-                            
-                        @else
-                            <!--<a href="{{ route('f.login') }}" class="h-cta-link"><i class="messages-icon"></i></a>-->
-                            <a href="{{ route('f.login') }}" class="h-cta-link"></a>
-                        @endauth
-                        <div class="user-menu-dropdown-wrap">
-                            <button class="user-menu-dropdown-btn"><i class="icon-user"></i></button><span class="desk" style="color:white">My Account</span> <span class="mobi"> 
-                            </span>
-                        </div>
-                            <div class="user-dropdown-menu">
-                                <ul>
-                                    @auth
-                                    @else
-                                        <li class="dropdown-menu-item">
-                                            <a href="{{ route('f.login') }}" class="dropdown-menu-link">Log In</a>
-                                        </li>
-                                        <li class="dropdown-menu-item">
-                                            <a href="{{ route('f.register') }}" class="dropdown-menu-link">Sign Up</a>
-                                        </li>
-                                    @endauth
-                                </ul>
-                            </div>
+                                @auth
+                                @else
+                                    @endauth @auth
+                                @else
+                                    <!--<a href="{{ route('f.login') }}" class="h-cta-link"><i class="messages-icon"></i></a>-->
+                                    <a href="{{ route('f.login') }}" class="h-cta-link"></a>
+                                @endauth
+                                <div class="user-menu-dropdown-wrap">
+                                    <button class="user-menu-dropdown-btn"><i class="icon-user"></i></button><span
+                                        class="desk" style="color:white">My Account</span> <span class="mobi">
+                                    </span>
+                                </div>
+                                <div class="user-dropdown-menu">
+                                    <ul>
+                                        @auth
+                                        @else
+                                            <li class="dropdown-menu-item">
+                                                <a href="{{ route('f.login') }}" class="dropdown-menu-link">Log In</a>
+                                            </li>
+                                            <li class="dropdown-menu-item">
+                                                <a href="{{ route('f.register') }}" class="dropdown-menu-link">Sign Up</a>
+                                            </li>
+                                        @endauth
+                                    </ul>
+                                </div>
                             </div>
                         @endauth
                     </div>
                 </div>
-                 <div class="header-cta-group">
-                    <a href="{{url('/')}}" class="home">Home</a>
+                <div class="header-cta-group">
+                    <a href="{{ url('/') }}" class="home">Home</a>
+                    @unless (request()->routeIs('f.search'))
+                        <a href="{{ route('f.search') }}" class="search">Search Now</a>
+                    @endunless
                     <a href="{{ route('f.petlisting') }}" class="your-pets">Edit Your Pets</a>
                 </div>
 
@@ -401,7 +410,7 @@
                         display: none;
                     }
 
-                    header .header-cta-group .home {
+                    header .header-cta-group a {
                         color: #ffffff;
                         padding: 2px 10px;
                         border-radius: 5px;
@@ -409,13 +418,6 @@
                         border: 2px solid #ffffff;
                     }
 
-                    header .header-cta-group .your-pets {
-                        color: #ffffff;
-                        padding: 2px 10px;
-                        border-radius: 5px;
-                        text-align: center;
-                        border: 2px solid #ffffff;  
-                    }
                     @media screen and (max-width: 1024px) {
                         header .header-cta-group {
                             display: flex;
@@ -491,7 +493,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     {{-- @livewireScriptConfig() --}}
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 
     {{-- <script>
@@ -524,7 +526,7 @@
     </script>
 
     @livewireScripts
-      @stack('scripts')
+    @stack('scripts')
 
 </body>
 
